@@ -3,10 +3,11 @@ package com.amos.think.api;
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
-import com.amos.think.dto.UserLoginCmd;
+import com.amos.think.dto.UserModifyCmd;
 import com.amos.think.dto.UserRegisterCmd;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.dto.query.UserListByNameQuery;
+import com.amos.think.dto.query.UserLoginQuery;
 
 /**
  * DESCRIPTION: 用户相关
@@ -25,12 +26,20 @@ public interface IUserService {
     Response register(UserRegisterCmd cmd);
 
     /**
-     * 用户登录
+     * 用户信息修改
      *
-     * @param cmd 用户登录请求
+     * @param cmd 用户信息修改请求
      * @return Response
      */
-    SingleResponse<UserVO> login(UserLoginCmd cmd);
+    Response modify(UserModifyCmd cmd);
+
+    /**
+     * 用户登录
+     *
+     * @param query 用户登录请求
+     * @return Response
+     */
+    SingleResponse<UserVO> login(UserLoginQuery query);
 
     /**
      * 根据用户名称查询

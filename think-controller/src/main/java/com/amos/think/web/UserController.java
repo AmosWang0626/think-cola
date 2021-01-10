@@ -3,10 +3,11 @@ package com.amos.think.web;
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;
 import com.amos.think.api.IUserService;
-import com.amos.think.dto.UserLoginCmd;
 import com.amos.think.dto.UserRegisterCmd;
+import com.amos.think.dto.clientobject.UserRegisterCO;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.dto.query.UserListByNameQuery;
+import com.amos.think.dto.query.UserLoginQuery;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,15 +32,17 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public Response register(@RequestBody UserRegisterCmd userRegisterCmd) {
+    public Response register(@RequestBody UserRegisterCO userRegister) {
+        UserRegisterCmd userRegisterCmd = new UserRegisterCmd();
+        userRegisterCmd.setUserRegister(userRegister);
 
         return userService.register(userRegisterCmd);
     }
 
     @PostMapping(value = "/login")
-    public Response register(@RequestBody UserLoginCmd userLoginCmd) {
+    public Response login(@RequestBody UserLoginQuery userLoginQuery) {
 
-        return userService.login(userLoginCmd);
+        return userService.login(userLoginQuery);
     }
 
     @GetMapping(value = "/list")

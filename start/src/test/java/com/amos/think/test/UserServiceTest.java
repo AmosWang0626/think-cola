@@ -5,21 +5,26 @@ import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.alibaba.fastjson.JSON;
 import com.amos.think.api.IUserService;
-import com.amos.think.dto.UserLoginCmd;
-import com.amos.think.dto.query.UserListByNameQuery;
+import com.amos.think.dto.UserModifyCmd;
 import com.amos.think.dto.UserRegisterCmd;
+import com.amos.think.dto.clientobject.UserModifyCO;
+import com.amos.think.dto.clientobject.UserRegisterCO;
 import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.data.UserVO;
-import com.amos.think.dto.co.UserRegisterCO;
+import com.amos.think.dto.query.UserListByNameQuery;
+import com.amos.think.dto.query.UserLoginQuery;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * DESCRIPTION: UserServiceTest
@@ -29,33 +34,35 @@ import java.time.LocalDate;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
     @Autowired
     private IUserService userService;
 
+    private static final String username = UUID.randomUUID().toString();
+    private static final String password = "666666";
 
     @Before
     public void setUp() {
-
+        System.out.println("测试用户名为：" + username);
     }
 
     @Test
-    public void userRegister() {
+    public void user_1_Register() {
         //1.prepare
         UserRegisterCmd registerCmd = new UserRegisterCmd();
 
         UserRegisterCO registerCO = new UserRegisterCO();
-        registerCO.setId("58c32da2-b69b-44b5-8e65-63d0adbedcf3");
-        registerCO.setName("小道远");
-        registerCO.setUsername("amos");
-        registerCO.setPassword("666666");
+        registerCO.setName("amos.wang");
+        registerCO.setUsername(username);
+        registerCO.setPassword(password);
         registerCO.setPhoneNo("189****8861");
         registerCO.setGender(1);
         registerCO.setBirthday(LocalDate.of(1996, 6, 26));
         registerCO.setDescription("https://amos.wang/");
 
-        registerCmd.setUserRegisterCO(registerCO);
+        registerCmd.setUserRegister(registerCO);
 
         //2.execute
         Response response = userService.register(registerCmd);
@@ -65,15 +72,15 @@ public class UserServiceTest {
     }
 
     @Test
-    public void userRegisterByRepeatUsername() {
+    public void user_2_RegisterByRepeatUsername() {
         //1.prepare
         UserRegisterCmd registerCmd = new UserRegisterCmd();
 
         UserRegisterCO registerCO = new UserRegisterCO();
-        registerCO.setUsername("amos");
-        registerCO.setPassword("000000");
+        registerCO.setUsername(username);
+        registerCO.setPassword(password);
 
-        registerCmd.setUserRegisterCO(registerCO);
+        registerCmd.setUserRegister(registerCO);
 
         //2.execute
         Response response = userService.register(registerCmd);
@@ -83,26 +90,57 @@ public class UserServiceTest {
     }
 
     @Test
-    public void userLogin() {
+    public void user_3_Modify() {
+        login();
+    }
+
+    private String login() {
         //1.prepare
-        UserLoginCmd userLoginCmd = new UserLoginCmd();
-        userLoginCmd.setUsername("amos");
-        userLoginCmd.setPassword("666666");
+        UserLoginQuery userLoginQuery = new UserLoginQuery();
+        userLoginQuery.setUsername(username);
+        userLoginQuery.setPassword(password);
 
         //2.execute
-        SingleResponse<UserVO> response = userService.login(userLoginCmd);
+        SingleResponse<UserVO> response = userService.login(userLoginQuery);
 
         System.out.println(JSON.toJSONString(response));
 
         //3.assert success
         Assert.assertTrue(response.isSuccess());
+
+        return response.getData().getId();
     }
 
     @Test
-    public void listByName() {
+    public void user_4_Modify() {
+        //1.prepare
+        String userId = login();
+
+        UserModifyCmd userModify = new UserModifyCmd();
+
+        UserModifyCO userModifyCO = new UserModifyCO();
+        userModifyCO.setId(userId);
+        userModifyCO.setName("小道远");
+        userModifyCO.setUsername(username);
+        userModifyCO.setPhoneNo("189----8861");
+        userModifyCO.setGender(0);
+        userModifyCO.setBirthday(LocalDate.of(1996, 5, 11));
+        userModifyCO.setDescription("https://github.com/AmosWang0626");
+
+        userModify.setUserModify(userModifyCO);
+
+        //2.execute
+        Response response = userService.modify(userModify);
+
+        //3.assert
+        Assert.assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void user_5_listByName() {
         //1.prepare
         UserListByNameQuery query = new UserListByNameQuery();
-        query.setName("");
+        query.setName(null);
 
         //2.execute
         MultiResponse<UserVO> response = userService.listByName(query);

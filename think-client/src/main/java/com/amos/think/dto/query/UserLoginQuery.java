@@ -1,6 +1,6 @@
-package com.amos.think.dto;
+package com.amos.think.dto.query;
 
-import com.alibaba.cola.dto.Command;
+import com.alibaba.cola.dto.Query;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UserLoginCmd extends Command {
+public class UserLoginQuery extends Query {
 
     @NotBlank
     private String username;

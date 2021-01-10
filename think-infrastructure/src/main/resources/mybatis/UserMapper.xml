@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.amos.think.gateway.impl.database.mapper.UserMapper">
 
-    <resultMap type="com.amos.think.gateway.impl.database.UserDO" id="userDOMap">
+    <resultMap type="com.amos.think.gateway.impl.database.dataobject.UserDO" id="userDOMap">
         <result property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="name" column="name"/>
@@ -40,7 +40,7 @@
         </where>
     </select>
 
-    <select id="findByUserName" resultType="com.amos.think.gateway.impl.database.UserDO">
+    <select id="getByUserName" resultType="com.amos.think.gateway.impl.database.dataobject.UserDO">
         select *
         <include refid="FROM_TABLE"/>
         where username = #{username}

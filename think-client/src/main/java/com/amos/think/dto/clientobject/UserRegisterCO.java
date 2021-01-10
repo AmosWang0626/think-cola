@@ -1,4 +1,4 @@
-package com.amos.think.dto.co;
+package com.amos.think.dto.clientobject;
 
 import com.amos.think.dto.data.UserVO;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.amos.think.gateway.impl.database;
+package com.amos.think.gateway.impl.database.dataobject;
 
 import com.amos.think.common.api.BaseDO;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.amos.think.gateway.impl.database.mapper;
 
 import com.amos.think.dto.query.UserListByNameQuery;
-import com.amos.think.gateway.impl.database.UserDO;
+import com.amos.think.gateway.impl.database.dataobject.UserDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    UserDO findByUserName(String username);
+    UserDO getByUserName(String username);
 
     List<UserDO> listByName(UserListByNameQuery query);
 

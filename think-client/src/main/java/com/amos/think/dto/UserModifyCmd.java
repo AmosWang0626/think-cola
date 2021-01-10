@@ -1,7 +1,7 @@
 package com.amos.think.dto;
 
 import com.alibaba.cola.dto.Command;
-import com.amos.think.dto.clientobject.UserRegisterCO;
+import com.amos.think.dto.clientobject.UserModifyCO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,13 +15,13 @@ import javax.validation.constraints.NotNull;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UserRegisterCmd extends Command {
+public class UserModifyCmd extends Command {
 
     /**
      * 为什么加这个 Form，Java对象单继承，Form继承自 UserDTO，就这。
      * UserLoginCmd就不需要单独定义一个 Form。
      */
     @NotNull
-    private UserRegisterCO userRegister;
+    private UserModifyCO userModify;
 
 }

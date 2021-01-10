@@ -1,14 +1,16 @@
-package com.amos.think.validator;
+package com.amos.think.user.validator;
 
 import com.alibaba.cola.exception.Assert;
-import com.amos.think.dto.co.UserRegisterCO;
+import com.amos.think.dto.clientobject.UserModifyCO;
+import com.amos.think.dto.clientobject.UserRegisterCO;
+import com.amos.think.dto.data.UserVO;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * DESCRIPTION: UserValidator
  *
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
- * @date 2021/1/9
+ * @date 2021/1/10
  */
 public class UserValidator {
 
@@ -17,7 +19,11 @@ public class UserValidator {
         checkPassword(co);
     }
 
-    private static void checkUsername(UserRegisterCO co) {
+    public static void checkUserModify(UserModifyCO co) {
+        checkUsername(co);
+    }
+
+    private static void checkUsername(UserVO co) {
         Assert.isFalse(StringUtils.isBlank(co.getUsername()), "用户名不能为空");
     }
 

@@ -1,6 +1,6 @@
 package com.amos.think.gateway.impl.database.repository;
 
-import com.amos.think.gateway.impl.database.UserDO;
+import com.amos.think.gateway.impl.database.dataobject.UserDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

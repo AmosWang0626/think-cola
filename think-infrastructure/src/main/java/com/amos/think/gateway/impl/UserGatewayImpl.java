@@ -5,7 +5,7 @@ import com.amos.think.common.util.RandomUtil;
 import com.amos.think.convertor.UserConvertor;
 import com.amos.think.domain.user.gateway.UserGateway;
 import com.amos.think.domain.user.model.UserEntity;
-import com.amos.think.gateway.impl.database.UserDO;
+import com.amos.think.gateway.impl.database.dataobject.UserDO;
 import com.amos.think.gateway.impl.database.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

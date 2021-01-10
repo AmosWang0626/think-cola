@@ -1,7 +1,7 @@
-package com.amos.think.app;
+package com.amos.think.user;
 
-import com.amos.think.dto.co.UserRegisterCO;
-import com.amos.think.validator.UserValidator;
+import com.amos.think.dto.clientobject.UserRegisterCO;
+import com.amos.think.user.validator.UserValidator;
 import org.junit.Test;
 
 public class UserValidatorTest {
