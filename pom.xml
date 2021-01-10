@@ -20,8 +20,8 @@
     </properties>
 
     <modules>
+        <module>think-controller</module>
         <module>think-client</module>
-        <module>think-adapter</module>
         <module>think-app</module>
         <module>think-domain</module>
         <module>think-infrastructure</module>
@@ -56,7 +56,7 @@
             <!--Project modules-->
             <dependency>
                 <groupId>com.amos</groupId>
-                <artifactId>think-adapter</artifactId>
+                <artifactId>think-controller</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -130,12 +130,12 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.4</version>
+                <version>3.11</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.55</version>
+                <version>1.2.73</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
