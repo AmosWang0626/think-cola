@@ -4,7 +4,7 @@ import com.amos.think.dto.form.UserRegisterForm;
 import com.amos.think.validator.UserValidator;
 import org.junit.Test;
 
-public class CustomerValidatorTest {
+public class UserValidatorTest {
 
     @Test
     public void testValidation() {

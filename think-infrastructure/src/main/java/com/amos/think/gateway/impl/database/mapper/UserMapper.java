@@ -1,7 +1,7 @@
-package com.amos.think.tunnel.database.user.mapper;
+package com.amos.think.gateway.impl.database.mapper;
 
 import com.amos.think.dto.query.UserListByNameQuery;
-import com.amos.think.tunnel.database.user.UserDO;
+import com.amos.think.gateway.impl.database.UserDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

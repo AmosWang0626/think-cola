@@ -3,7 +3,7 @@ package com.amos.think.convertor;
 import com.amos.think.domain.user.model.User;
 import com.amos.think.dto.data.UserDTO;
 import com.amos.think.dto.form.UserRegisterForm;
-import com.amos.think.tunnel.database.user.UserDO;
+import com.amos.think.gateway.impl.database.UserDO;
 
 /**
  * DESCRIPTION: UserConvertor

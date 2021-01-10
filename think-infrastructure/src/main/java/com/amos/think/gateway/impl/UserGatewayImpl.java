@@ -1,12 +1,12 @@
-package com.amos.think.tunnel.database.user.gateway;
+package com.amos.think.gateway.impl;
 
 import com.amos.think.common.util.DesSecretUtil;
 import com.amos.think.common.util.RandomUtil;
 import com.amos.think.convertor.UserConvertor;
 import com.amos.think.domain.user.gateway.UserGateway;
 import com.amos.think.domain.user.model.User;
-import com.amos.think.tunnel.database.user.UserDO;
-import com.amos.think.tunnel.database.user.repository.UserRepository;
+import com.amos.think.gateway.impl.database.UserDO;
+import com.amos.think.gateway.impl.database.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

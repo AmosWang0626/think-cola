@@ -14,8 +14,8 @@ import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.data.UserDTO;
 import com.amos.think.dto.form.UserRegisterForm;
 import com.amos.think.dto.query.UserListByNameQuery;
-import com.amos.think.tunnel.database.user.UserDO;
-import com.amos.think.tunnel.database.user.mapper.UserMapper;
+import com.amos.think.gateway.impl.database.UserDO;
+import com.amos.think.gateway.impl.database.mapper.UserMapper;
 import com.amos.think.validator.UserValidator;
 import org.springframework.stereotype.Service;
 

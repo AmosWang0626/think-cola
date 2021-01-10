@@ -46,7 +46,7 @@ public class UserServiceTest {
         UserRegisterCmd registerCmd = new UserRegisterCmd();
 
         UserRegisterForm registerForm = new UserRegisterForm();
-        registerForm.setId("127e66ff-8bec-4549-9670-242618f9894d");
+        registerForm.setId("58c32da2-b69b-44b5-8e65-63d0adbedcf3");
         registerForm.setName("小道远");
         registerForm.setUsername("amos");
         registerForm.setPassword("666666");

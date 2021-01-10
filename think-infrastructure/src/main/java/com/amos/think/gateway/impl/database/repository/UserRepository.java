@@ -1,6 +1,6 @@
-package com.amos.think.tunnel.database.user.repository;
+package com.amos.think.gateway.impl.database.repository;
 
-import com.amos.think.tunnel.database.user.UserDO;
+import com.amos.think.gateway.impl.database.UserDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

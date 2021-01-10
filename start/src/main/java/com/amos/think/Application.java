@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableJpaAuditing
 @SpringBootApplication(scanBasePackages = {"com.amos.think", "com.alibaba.cola"})
-@MapperScan("com.amos.think.tunnel.database.**.mapper")
+@MapperScan("com.amos.think.gateway.impl.database.mapper")
 public class Application {
 
     public static void main(String[] args) {
