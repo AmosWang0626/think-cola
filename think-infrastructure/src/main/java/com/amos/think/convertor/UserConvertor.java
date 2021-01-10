@@ -1,8 +1,8 @@
 package com.amos.think.convertor;
 
-import com.amos.think.domain.user.model.User;
-import com.amos.think.dto.data.UserDTO;
-import com.amos.think.dto.form.UserRegisterForm;
+import com.amos.think.domain.user.model.UserEntity;
+import com.amos.think.dto.co.UserRegisterCO;
+import com.amos.think.dto.data.UserVO;
 import com.amos.think.gateway.impl.database.UserDO;
 
 /**
@@ -13,55 +13,55 @@ import com.amos.think.gateway.impl.database.UserDO;
  */
 public class UserConvertor {
 
-    public static User toDomain(UserRegisterForm form) {
-        User user = new User();
-        user.setId(form.getId());
-        user.setUsername(form.getUsername());
-        user.setPassword(form.getPassword());
-        user.setName(form.getName());
-        user.setPhoneNo(form.getPhoneNo());
-        user.setGender(form.getGender());
-        user.setBirthday(form.getBirthday());
-        user.setDescription(form.getDescription());
+    public static UserEntity toEntity(UserRegisterCO co) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(co.getId());
+        userEntity.setUsername(co.getUsername());
+        userEntity.setPassword(co.getPassword());
+        userEntity.setName(co.getName());
+        userEntity.setPhoneNo(co.getPhoneNo());
+        userEntity.setGender(co.getGender());
+        userEntity.setBirthday(co.getBirthday());
+        userEntity.setDescription(co.getDescription());
 
-        return user;
+        return userEntity;
     }
 
-    public static UserDO toDataObject(User user) {
+    public static UserDO toDataObject(UserEntity userEntity) {
         UserDO userDO = new UserDO();
-        userDO.setId(user.getId());
-        userDO.setUsername(user.getUsername());
-        userDO.setPassword(user.getPassword());
-        userDO.setSalt(user.getSalt());
-        userDO.setName(user.getName());
-        userDO.setPhoneNo(user.getPhoneNo());
-        userDO.setGender(user.getGender());
-        userDO.setBirthday(user.getBirthday());
-        userDO.setDescription(user.getDescription());
+        userDO.setId(userEntity.getId());
+        userDO.setUsername(userEntity.getUsername());
+        userDO.setPassword(userEntity.getPassword());
+        userDO.setSalt(userEntity.getSalt());
+        userDO.setName(userEntity.getName());
+        userDO.setPhoneNo(userEntity.getPhoneNo());
+        userDO.setGender(userEntity.getGender());
+        userDO.setBirthday(userEntity.getBirthday());
+        userDO.setDescription(userEntity.getDescription());
 
         return userDO;
     }
 
-    public static void merge(User user, UserDO userDO) {
-        userDO.setUsername(user.getUsername());
-        userDO.setName(user.getName());
-        userDO.setPhoneNo(user.getPhoneNo());
-        userDO.setGender(user.getGender());
-        userDO.setBirthday(user.getBirthday());
-        userDO.setDescription(user.getDescription());
+    public static void mergeDataObject(UserEntity userEntity, UserDO userDO) {
+        userDO.setUsername(userEntity.getUsername());
+        userDO.setName(userEntity.getName());
+        userDO.setPhoneNo(userEntity.getPhoneNo());
+        userDO.setGender(userEntity.getGender());
+        userDO.setBirthday(userEntity.getBirthday());
+        userDO.setDescription(userEntity.getDescription());
     }
 
-    public static UserDTO convert(UserDO userDO) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(userDO.getId());
-        userDTO.setUsername(userDO.getUsername());
-        userDTO.setName(userDO.getName());
-        userDTO.setPhoneNo(userDO.getPhoneNo());
-        userDTO.setGender(userDO.getGender());
-        userDTO.setBirthday(userDO.getBirthday());
-        userDTO.setDescription(userDO.getDescription());
+    public static UserVO toValueObject(UserDO userDO) {
+        UserVO userVO = new UserVO();
+        userVO.setId(userDO.getId());
+        userVO.setUsername(userDO.getUsername());
+        userVO.setName(userDO.getName());
+        userVO.setPhoneNo(userDO.getPhoneNo());
+        userVO.setGender(userDO.getGender());
+        userVO.setBirthday(userDO.getBirthday());
+        userVO.setDescription(userDO.getDescription());
 
-        return userDTO;
+        return userVO;
     }
 
 }

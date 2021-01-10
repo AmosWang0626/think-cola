@@ -1,7 +1,7 @@
 package com.amos.think.dto;
 
 import com.alibaba.cola.dto.Command;
-import com.amos.think.dto.form.UserRegisterForm;
+import com.amos.think.dto.co.UserRegisterCO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,6 +22,6 @@ public class UserRegisterCmd extends Command {
      * UserLoginCmd就不需要单独定义一个 Form。
      */
     @NotNull
-    private UserRegisterForm form;
+    private UserRegisterCO userRegisterCO;
 
 }

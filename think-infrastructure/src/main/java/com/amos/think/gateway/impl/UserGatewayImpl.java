@@ -4,7 +4,7 @@ import com.amos.think.common.util.DesSecretUtil;
 import com.amos.think.common.util.RandomUtil;
 import com.amos.think.convertor.UserConvertor;
 import com.amos.think.domain.user.gateway.UserGateway;
-import com.amos.think.domain.user.model.User;
+import com.amos.think.domain.user.model.UserEntity;
 import com.amos.think.gateway.impl.database.UserDO;
 import com.amos.think.gateway.impl.database.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -26,27 +26,27 @@ public class UserGatewayImpl implements UserGateway {
     private UserRepository userRepository;
 
     @Override
-    public void save(User user) {
+    public void save(UserEntity userEntity) {
         UserDO userDO = null;
-        if (StringUtils.isNotBlank(user.getId())) {
-            Optional<UserDO> byId = userRepository.findById(user.getId());
+        if (StringUtils.isNotBlank(userEntity.getId())) {
+            Optional<UserDO> byId = userRepository.findById(userEntity.getId());
             if (byId.isPresent()) {
 
                 // 更新
                 userDO = byId.get();
-                UserConvertor.merge(user, userDO);
+                UserConvertor.mergeDataObject(userEntity, userDO);
             }
         }
 
         if (userDO == null) {
             // 生成密码盐
             String salt = RandomUtil.generateLetterString(8);
-            String encryptPassword = DesSecretUtil.encrypt(user.getPassword(), salt);
-            user.setSalt(salt);
-            user.setPassword(encryptPassword);
+            String encryptPassword = DesSecretUtil.encrypt(userEntity.getPassword(), salt);
+            userEntity.setSalt(salt);
+            userEntity.setPassword(encryptPassword);
 
             // 新增
-            userDO = UserConvertor.toDataObject(user);
+            userDO = UserConvertor.toDataObject(userEntity);
         }
 
         userRepository.save(userDO);

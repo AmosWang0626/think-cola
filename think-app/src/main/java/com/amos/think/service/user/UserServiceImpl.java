@@ -11,8 +11,8 @@ import com.amos.think.domain.user.gateway.UserGateway;
 import com.amos.think.dto.UserLoginCmd;
 import com.amos.think.dto.UserRegisterCmd;
 import com.amos.think.dto.data.ErrorCode;
-import com.amos.think.dto.data.UserDTO;
-import com.amos.think.dto.form.UserRegisterForm;
+import com.amos.think.dto.data.UserVO;
+import com.amos.think.dto.co.UserRegisterCO;
 import com.amos.think.dto.query.UserListByNameQuery;
 import com.amos.think.gateway.impl.database.UserDO;
 import com.amos.think.gateway.impl.database.mapper.UserMapper;
@@ -40,23 +40,23 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Response register(UserRegisterCmd cmd) {
-        UserRegisterForm form = cmd.getForm();
+        UserRegisterCO co = cmd.getUserRegisterCO();
 
-        UserValidator.checkUserForm(cmd.getForm());
+        UserValidator.checkUserRegister(cmd.getUserRegisterCO());
 
         // check 用户名是否重复
-        if (userMapper.existUsername(form.getId(), form.getUsername())) {
+        if (userMapper.existUsername(co.getId(), co.getUsername())) {
             return Response.buildFailure(ErrorCode.B_USER_usernameRepeat.getErrCode(),
                     ErrorCode.B_USER_usernameRepeat.getErrDesc());
         }
 
-        userGateway.save(UserConvertor.toDomain(form));
+        userGateway.save(UserConvertor.toEntity(co));
 
         return Response.buildSuccess();
     }
 
     @Override
-    public SingleResponse<UserDTO> login(UserLoginCmd cmd) {
+    public SingleResponse<UserVO> login(UserLoginCmd cmd) {
         UserDO byUserName = userMapper.findByUserName(cmd.getUsername());
         if (byUserName == null) {
             return SingleResponse.buildFailure(ErrorCode.B_USER_passwordError.getErrCode(), ErrorCode.B_USER_passwordError.getErrDesc());
@@ -67,17 +67,17 @@ public class UserServiceImpl implements IUserService {
             return SingleResponse.buildFailure(ErrorCode.B_USER_passwordError.getErrCode(), ErrorCode.B_USER_passwordError.getErrDesc());
         }
 
-        return SingleResponse.of(UserConvertor.convert(byUserName));
+        return SingleResponse.of(UserConvertor.toValueObject(byUserName));
     }
 
     @Override
-    public MultiResponse<UserDTO> listByName(UserListByNameQuery query) {
+    public MultiResponse<UserVO> listByName(UserListByNameQuery query) {
         List<UserDO> userDOList = userMapper.listByName(query);
-        List<UserDTO> userDTOList = userDOList.stream()
-                .map(UserConvertor::convert)
+        List<UserVO> userVOList = userDOList.stream()
+                .map(UserConvertor::toValueObject)
                 .collect(Collectors.toList());
 
-        return MultiResponse.of(userDTOList);
+        return MultiResponse.of(userVOList);
     }
 
 }

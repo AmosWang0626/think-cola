@@ -5,7 +5,7 @@ import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.amos.think.dto.UserLoginCmd;
 import com.amos.think.dto.UserRegisterCmd;
-import com.amos.think.dto.data.UserDTO;
+import com.amos.think.dto.data.UserVO;
 import com.amos.think.dto.query.UserListByNameQuery;
 
 /**
@@ -30,7 +30,7 @@ public interface IUserService {
      * @param cmd 用户登录请求
      * @return Response
      */
-    SingleResponse<UserDTO> login(UserLoginCmd cmd);
+    SingleResponse<UserVO> login(UserLoginCmd cmd);
 
     /**
      * 根据用户名称查询
@@ -38,6 +38,6 @@ public interface IUserService {
      * @param query 用户查询请求
      * @return MultiResponse
      */
-    MultiResponse<UserDTO> listByName(UserListByNameQuery query);
+    MultiResponse<UserVO> listByName(UserListByNameQuery query);
 
 }

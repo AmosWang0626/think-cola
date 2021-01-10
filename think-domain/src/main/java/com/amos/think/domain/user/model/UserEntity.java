@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @date 2021/1/8
  */
 @Data
-public class User {
+public class UserEntity {
 
     private String id;
 

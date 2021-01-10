@@ -1,6 +1,6 @@
 # Think
 
-> 工程师的首要技术使命就是控制复杂度，本项目结合COLA（整洁面向对象分层架构）实现。
+> 工程师的首要技术使命就是控制复杂度，本项目结合COLA 4.0（整洁面向对象分层架构）实现。
 
 ## 使用 Maven archetype 创建项目
 
@@ -9,6 +9,8 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 ```
 
 ## 项目架构图
+
+> adapter 暂时用不到，就用 controller 代替了。
 
 ![项目架构图](doc/image/framework.png)
 
@@ -20,13 +22,16 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 重构项目时，可以先把模块下的包建好，然后把之前项目的代码迁到指定包。最后，按业务线连起来，调试、跑通。
 
+实践的时候走了不少弯路，建议把作者写的 5 篇博客看一遍（链接放文末了），github COLA sample/craftsman 这个版本可能比较老。
+
 ## 个人想法
 
-> 可能有错，有问题的话提个Issue，谢谢
+> 可能有错，欢迎Issue，谢谢
 
 - 公司用的用户表，一般都配了个用户信息表，用于保存用户的附加信息，细想一下，全放一起真的不行吗？
 - 不要把领域对象和数据库中的存的xxxDO混为一谈；想一下，领域对象要创建人、修改人、逻辑删除标识有啥用？
 - 一开始不要过度设计，需求增加的过程中，更能看清项目未来的方向；另外，不要把重构一直往后拖，越早重构越可控；
+- xxxDTO 什么时候用呢，DTO 是不是可以用 xxxCO、xxxVO 等代替。
 
 ## COLA 规范
 
@@ -35,11 +40,30 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 |规范|用途|解释|
 |---|---|---|
 |xxxCmd| Client Request | Cmd代表Command，表示一个用户请求 |
-|xxxForm| Request Form | xxxCO？xxxRequest？个人感觉还是xxxForm比较好 |
-|IxxxService| Api Service | xxxServiceI不太习惯，就把I放在前边吧 |
+|xxxCO| Client Object | 客户对象，用于传输数据，等同于DTO |
+|xxxVO| Value Object | 值对象 |
+|xxxEntity| Entity | 领域实体 |
+|IxxxService| API Service | xxxServiceI 不太习惯，就把 I 放在前边吧 |
+|xxxDomainService| Domain Service | 需要多个领域对象协作时，使用DomainService |
+|xxxCmdExe| Command Executor | 命令模式，每一个用户请求对应一个执行器 |
+|xxxInterceptor| Command Interceptor | 拦截器，用于处理切面逻辑 |
 |xxxValidator| Validator | 校验器，用于校验的类 |
 |xxxConvertor| Convertor | 转化器，实现不同层级对象互转（[小彩蛋](./doc/README.md#Convertor)） |
+|xxxAssembler| Assembler | 组装器，组装外部服务调用参数 |
 |xxxDO| Data Object | 数据对象，用于持久化 |
+
+### 方法名约定
+
+|CRUD操作| 方法名约定 |
+|---|---|
+|新增| create |
+|添加| add |
+|删除| remove（App和Domain层），delete（Infrastructure层） |
+|修改| update |
+|查询（单个结果） | get |
+|查询（多个结果） | list |
+|分页查询| page |
+|统计| count |
 
 ### 模块规范
 
@@ -65,6 +89,10 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 - [https://github.com/alibaba/COLA](https://github.com/alibaba/COLA)
 
+- [复杂度应对之道 - COLA应用架构](https://blog.csdn.net/significantfrank/article/details/85785565)
+- [应用架构COLA 2.0](https://blog.csdn.net/significantfrank/article/details/100074716)
+- [应用架构COLA3.0：让事情回归简单](https://blog.csdn.net/significantfrank/article/details/106976804)
+- [应用架构COLA 3.1：分类思维](https://blog.csdn.net/significantfrank/article/details/109529311)
 - [COLA 4.0：应用架构的最佳实践](https://blog.csdn.net/significantfrank/article/details/110934799)
 
 - 张建飞著. 代码精进之路：从码农到工匠[M].北京：人民邮电出版社，2020.1

@@ -5,7 +5,7 @@ import com.alibaba.cola.dto.Response;
 import com.amos.think.api.IUserService;
 import com.amos.think.dto.UserLoginCmd;
 import com.amos.think.dto.UserRegisterCmd;
-import com.amos.think.dto.data.UserDTO;
+import com.amos.think.dto.data.UserVO;
 import com.amos.think.dto.query.UserListByNameQuery;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/list")
-    public MultiResponse<UserDTO> list(@RequestParam(required = false) String name) {
+    public MultiResponse<UserVO> list(@RequestParam(required = false) String name) {
         UserListByNameQuery query = new UserListByNameQuery();
         query.setName(name);
 

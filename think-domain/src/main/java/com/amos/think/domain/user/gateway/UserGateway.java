@@ -1,6 +1,6 @@
 package com.amos.think.domain.user.gateway;
 
-import com.amos.think.domain.user.model.User;
+import com.amos.think.domain.user.model.UserEntity;
 
 /**
  * DESCRIPTION: User Gateway
@@ -13,8 +13,8 @@ public interface UserGateway {
     /**
      * 保存用户
      *
-     * @param user User Domain
+     * @param userEntity User Domain
      */
-    void save(User user);
+    void save(UserEntity userEntity);
 
 }

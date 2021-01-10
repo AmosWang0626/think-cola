@@ -1,7 +1,7 @@
 package com.amos.think.validator;
 
 import com.alibaba.cola.exception.Assert;
-import com.amos.think.dto.form.UserRegisterForm;
+import com.amos.think.dto.co.UserRegisterCO;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -12,17 +12,17 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class UserValidator {
 
-    public static void checkUserForm(UserRegisterForm form) {
-        checkUsername(form);
-        checkPassword(form);
+    public static void checkUserRegister(UserRegisterCO co) {
+        checkUsername(co);
+        checkPassword(co);
     }
 
-    private static void checkUsername(UserRegisterForm form) {
-        Assert.isFalse(StringUtils.isBlank(form.getUsername()), "用户名不能为空");
+    private static void checkUsername(UserRegisterCO co) {
+        Assert.isFalse(StringUtils.isBlank(co.getUsername()), "用户名不能为空");
     }
 
-    private static void checkPassword(UserRegisterForm form) {
-        Assert.isFalse(StringUtils.isBlank(form.getId()) && StringUtils.isBlank(form.getPassword()), "密码不能为空");
+    private static void checkPassword(UserRegisterCO co) {
+        Assert.isFalse(StringUtils.isBlank(co.getId()) && StringUtils.isBlank(co.getPassword()), "密码不能为空");
     }
 
 }

@@ -9,8 +9,8 @@ import com.amos.think.dto.UserLoginCmd;
 import com.amos.think.dto.query.UserListByNameQuery;
 import com.amos.think.dto.UserRegisterCmd;
 import com.amos.think.dto.data.ErrorCode;
-import com.amos.think.dto.data.UserDTO;
-import com.amos.think.dto.form.UserRegisterForm;
+import com.amos.think.dto.data.UserVO;
+import com.amos.think.dto.co.UserRegisterCO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,17 +45,17 @@ public class UserServiceTest {
         //1.prepare
         UserRegisterCmd registerCmd = new UserRegisterCmd();
 
-        UserRegisterForm registerForm = new UserRegisterForm();
-        registerForm.setId("58c32da2-b69b-44b5-8e65-63d0adbedcf3");
-        registerForm.setName("小道远");
-        registerForm.setUsername("amos");
-        registerForm.setPassword("666666");
-        registerForm.setPhoneNo("189****8861");
-        registerForm.setGender(1);
-        registerForm.setBirthday(LocalDate.of(1996, 6, 26));
-        registerForm.setDescription("https://amos.wang/");
+        UserRegisterCO registerCO = new UserRegisterCO();
+        registerCO.setId("58c32da2-b69b-44b5-8e65-63d0adbedcf3");
+        registerCO.setName("小道远");
+        registerCO.setUsername("amos");
+        registerCO.setPassword("666666");
+        registerCO.setPhoneNo("189****8861");
+        registerCO.setGender(1);
+        registerCO.setBirthday(LocalDate.of(1996, 6, 26));
+        registerCO.setDescription("https://amos.wang/");
 
-        registerCmd.setForm(registerForm);
+        registerCmd.setUserRegisterCO(registerCO);
 
         //2.execute
         Response response = userService.register(registerCmd);
@@ -69,11 +69,11 @@ public class UserServiceTest {
         //1.prepare
         UserRegisterCmd registerCmd = new UserRegisterCmd();
 
-        UserRegisterForm registerForm = new UserRegisterForm();
-        registerForm.setUsername("amos");
-        registerForm.setPassword("000000");
+        UserRegisterCO registerCO = new UserRegisterCO();
+        registerCO.setUsername("amos");
+        registerCO.setPassword("000000");
 
-        registerCmd.setForm(registerForm);
+        registerCmd.setUserRegisterCO(registerCO);
 
         //2.execute
         Response response = userService.register(registerCmd);
@@ -90,7 +90,7 @@ public class UserServiceTest {
         userLoginCmd.setPassword("666666");
 
         //2.execute
-        SingleResponse<UserDTO> response = userService.login(userLoginCmd);
+        SingleResponse<UserVO> response = userService.login(userLoginCmd);
 
         System.out.println(JSON.toJSONString(response));
 
@@ -105,7 +105,7 @@ public class UserServiceTest {
         query.setName("");
 
         //2.execute
-        MultiResponse<UserDTO> response = userService.listByName(query);
+        MultiResponse<UserVO> response = userService.listByName(query);
 
         System.out.println(JSON.toJSONString(response));
 
