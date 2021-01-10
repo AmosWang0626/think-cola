@@ -70,7 +70,9 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 > 没有银弹，仅做参考，按需取舍吧
 
 ![核心业务模块](doc/image/module-app.png)
+
 ![领域模块](doc/image/module-domain.png)
+
 ![基础设施模块](doc/image/module-infra.png)
 
 ### 《代码精进之路》摘录
