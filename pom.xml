@@ -9,6 +9,7 @@
     <name>think</name>
 
     <properties>
+        <!--<skipTests>true</skipTests>-->
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,6 +17,7 @@
 
         <mybatis-starter.version>2.1.4</mybatis-starter.version>
         <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
+        <h2.version>1.4.200</h2.version>
         <cola.components.version>4.0.0</cola.components.version>
     </properties>
 
@@ -92,6 +94,11 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
             </dependency>
             <!--Spring Boot End-->
             <!--Validation API-->

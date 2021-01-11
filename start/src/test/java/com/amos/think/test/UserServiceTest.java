@@ -45,7 +45,7 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        System.out.println("测试用户名为：" + username);
+        System.out.println("test username is [" + username + "]");
     }
 
     @Test
