@@ -22,16 +22,16 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 重构项目时，可以先把模块下的包建好，然后把之前项目的代码迁到指定包。最后，按业务线连起来，调试、跑通。
 
-实践的时候走了不少弯路，建议把作者写的 5 篇博客看一遍（链接放文末了），github COLA sample/craftsman 这个版本可能比较老。
+实践的时候走了不少弯路，建议把作者写的 5 篇博客看一遍（链接放文末了），Github COLA [sample/craftsman](https://github.com/alibaba/COLA/tree/master/samples/craftsman) 这个版本可能比较老。
 
 ## 个人想法
 
 > 可能有错，欢迎Issue，谢谢
 
-- 公司用的用户表，一般都配了个用户信息表，用于保存用户的附加信息，细想一下，全放一起真的不行吗？
+- 公司用的用户表，一般都配了个用户信息表，用于保存用户的附加信息，想查个中文名还要关联一张表，细想一下，全放一起真的不行吗？
 - 不要把领域对象和数据库中的存的xxxDO混为一谈；想一下，领域对象要创建人、修改人、逻辑删除标识有啥用？
 - 一开始不要过度设计，需求增加的过程中，更能看清项目未来的方向；另外，不要把重构一直往后拖，越早重构越可控；
-- xxxDTO 什么时候用呢，DTO 是不是可以用 xxxCO、xxxVO 等代替。
+- xxxDTO 什么时候用呢，DTO 是不是可以用 xxxCO、xxxVO 等代替？
 
 ## COLA 规范
 
