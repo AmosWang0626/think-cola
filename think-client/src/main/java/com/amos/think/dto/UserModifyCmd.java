@@ -17,10 +17,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserModifyCmd extends Command {
 
-    /**
-     * 为什么加这个 Form，Java对象单继承，Form继承自 UserDTO，就这。
-     * UserLoginCmd就不需要单独定义一个 Form。
-     */
     @NotNull
     private UserModifyCO userModify;
 

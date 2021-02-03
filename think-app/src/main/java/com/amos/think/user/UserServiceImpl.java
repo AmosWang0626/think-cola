@@ -24,10 +24,13 @@ import javax.annotation.Resource;
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
  * @date 2021/1/8
  */
-@Service("userService")
+@Service
 @CatchAndLog
 public class UserServiceImpl implements IUserService {
 
+    /**
+     * xxxExe 避免 Service 膨胀利器
+     */
     @Resource
     private UserRegisterCmdExe userRegisterCmdExe;
     @Resource

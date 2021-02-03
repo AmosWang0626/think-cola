@@ -29,7 +29,7 @@ public class UserEntity {
     private String salt;
 
     /**
-     * 姓名（较常用，故放在用户主表）
+     * 姓名
      */
     private String name;
 

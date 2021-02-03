@@ -14,11 +14,17 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class UserValidator {
 
+    /**
+     * 用户注册，用户名、密码都不能为空
+     */
     public static void checkUserRegister(UserRegisterCO co) {
         checkUsername(co);
         checkPassword(co);
     }
 
+    /**
+     * 用户信息修改用户名不能为空
+     */
     public static void checkUserModify(UserModifyCO co) {
         checkUsername(co);
     }

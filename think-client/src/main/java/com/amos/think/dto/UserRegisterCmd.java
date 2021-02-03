@@ -18,8 +18,10 @@ import javax.validation.constraints.NotNull;
 public class UserRegisterCmd extends Command {
 
     /**
-     * 为什么加这个 Form，Java对象单继承，Form继承自 UserDTO，就这。
-     * UserLoginCmd就不需要单独定义一个 Form。
+     * 为什么加这个 xxxCO ?
+     * 首先，可以不加。这里比较特殊，Java对象单继承，xxxCO 继承自 UserVO。
+     *
+     * @see com.amos.think.dto.query.UserLoginQuery 就不需要单独定义一个 xxxCO
      */
     @NotNull
     private UserRegisterCO userRegister;

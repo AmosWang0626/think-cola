@@ -37,7 +37,7 @@ public class UserDO extends BaseDO {
     private String salt;
 
     /**
-     * 姓名
+     * 姓名（较常用，故放在用户主表）
      */
     private String name;
 

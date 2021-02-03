@@ -22,7 +22,7 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 重构项目时，可以先把模块下的包建好，然后把之前项目的代码迁到指定包。最后，按业务线连起来，调试、跑通。
 
-实践的时候走了不少弯路，建议把作者写的 5 篇博客看一遍（链接放文末了），Github COLA [sample/craftsman](https://github.com/alibaba/COLA/tree/master/samples/craftsman) 这个版本可能比较老。
+实践的时候走了不少弯路，建议把作者写的 5 篇博客看一遍（链接放文末了）
 
 ## 个人想法
 
@@ -30,7 +30,7 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 - 不要把领域对象和数据库中的存的xxxDO混为一谈；想一下，领域对象要创建人、修改人、逻辑删除标识有啥用？
 - 一开始不要过度设计，需求增加的过程中，更能看清项目未来的方向；另外，不要把重构一直往后拖，越早重构越可控；
-- xxxDTO 什么时候用呢，DTO 是不是可以用 xxxCO、xxxVO 等代替？
+- xxxDTO 什么时候用呢，DTO 是不是完全可以用 xxxCO、xxxVO 等代替？
 
 ## COLA 规范
 
@@ -38,18 +38,20 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 |规范|用途|解释|
 |---|---|---|
-|xxxCmd| Client Request | Cmd代表Command，表示一个用户请求 |
 |xxxCO| Client Object | 客户对象，用于传输数据，等同于DTO |
+|xxxCmd| Client Request | Cmd代表Command，表示一个写请求 |
+|xxxQuery| Client Request | Query，表示一个读请求 |
+|xxxCmdExe| Command Executor | 命令模式，每一个写请求对应一个执行器 |
+|xxxQueryExe| Query Executor | 命令模式，每一个读请求对应一个执行器 |
 |xxxVO| Value Object | 值对象 |
 |xxxEntity| Entity | 领域实体 |
+|xxxDO| Data Object | 数据对象，用于持久化 |
+|xxxInterceptor| Command Interceptor | 拦截器，用于处理切面逻辑 |
 |IxxxService| API Service | xxxServiceI 不太习惯，就把 I 放在前边吧 |
 |xxxDomainService| Domain Service | 需要多个领域对象协作时，使用DomainService |
-|xxxCmdExe| Command Executor | 命令模式，每一个用户请求对应一个执行器 |
-|xxxInterceptor| Command Interceptor | 拦截器，用于处理切面逻辑 |
 |xxxValidator| Validator | 校验器，用于校验的类 |
-|xxxConvertor| Convertor | 转化器，实现不同层级对象互转（[小彩蛋](./doc/README.md#Convertor)） |
 |xxxAssembler| Assembler | 组装器，组装外部服务调用参数 |
-|xxxDO| Data Object | 数据对象，用于持久化 |
+|xxxConvertor| Convertor | 转化器，实现不同层级对象互转（[小彩蛋](./doc/README.md#Convertor)） |
 
 ### 方法名约定
 
