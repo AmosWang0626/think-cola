@@ -5,6 +5,7 @@ import com.amos.think.dto.clientobject.UserModifyCO;
 import com.amos.think.dto.clientobject.UserRegisterCO;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;
+import com.amos.think.gateway.impl.database.dataobject.UserInfoDO;
 
 /**
  * DESCRIPTION: UserConvertor
@@ -48,10 +49,15 @@ public class UserConvertor {
         userDO.setPassword(userEntity.getPassword());
         userDO.setSalt(userEntity.getSalt());
         userDO.setName(userEntity.getName());
-        userDO.setPhoneNo(userEntity.getPhoneNo());
-        userDO.setGender(userEntity.getGender());
-        userDO.setBirthday(userEntity.getBirthday());
-        userDO.setDescription(userEntity.getDescription());
+
+        // user info
+        UserInfoDO userInfoDO = new UserInfoDO();
+        userInfoDO.setPhoneNo(userEntity.getPhoneNo());
+        userInfoDO.setGender(userEntity.getGender());
+        userInfoDO.setBirthday(userEntity.getBirthday());
+        userInfoDO.setDescription(userEntity.getDescription());
+
+        userDO.setUserInfoDO(userInfoDO);
 
         return userDO;
     }
@@ -59,10 +65,10 @@ public class UserConvertor {
     public static void mergeDataObject(UserEntity userEntity, UserDO userDO) {
         userDO.setUsername(userEntity.getUsername());
         userDO.setName(userEntity.getName());
-        userDO.setPhoneNo(userEntity.getPhoneNo());
-        userDO.setGender(userEntity.getGender());
-        userDO.setBirthday(userEntity.getBirthday());
-        userDO.setDescription(userEntity.getDescription());
+        userDO.getUserInfoDO().setPhoneNo(userEntity.getPhoneNo());
+        userDO.getUserInfoDO().setGender(userEntity.getGender());
+        userDO.getUserInfoDO().setBirthday(userEntity.getBirthday());
+        userDO.getUserInfoDO().setDescription(userEntity.getDescription());
     }
 
     public static UserVO toValueObject(UserDO userDO) {
@@ -70,10 +76,10 @@ public class UserConvertor {
         userVO.setId(userDO.getId());
         userVO.setUsername(userDO.getUsername());
         userVO.setName(userDO.getName());
-        userVO.setPhoneNo(userDO.getPhoneNo());
-        userVO.setGender(userDO.getGender());
-        userVO.setBirthday(userDO.getBirthday());
-        userVO.setDescription(userDO.getDescription());
+        userVO.setPhoneNo(userDO.getUserInfoDO().getPhoneNo());
+        userVO.setGender(userDO.getUserInfoDO().getGender());
+        userVO.setBirthday(userDO.getUserInfoDO().getBirthday());
+        userVO.setDescription(userDO.getUserInfoDO().getDescription());
 
         return userVO;
     }
