@@ -39,7 +39,15 @@ public interface IUserService {
      * @param query 用户登录请求
      * @return Response
      */
-    SingleResponse<UserVO> login(UserLoginQuery query);
+    Response login(UserLoginQuery query);
+
+    /**
+     * 获取用户信息
+     *
+     * @param username 用户名
+     * @return 用户信息
+     */
+    SingleResponse<UserVO> getUserInfo(String username);
 
     /**
      * 根据用户名称查询

@@ -76,10 +76,12 @@ public class UserConvertor {
         userVO.setId(userDO.getId());
         userVO.setUsername(userDO.getUsername());
         userVO.setName(userDO.getName());
-        userVO.setPhoneNo(userDO.getUserInfoDO().getPhoneNo());
-        userVO.setGender(userDO.getUserInfoDO().getGender());
-        userVO.setBirthday(userDO.getUserInfoDO().getBirthday());
-        userVO.setDescription(userDO.getUserInfoDO().getDescription());
+        if (userDO.getUserInfoDO() != null) {
+            userVO.setPhoneNo(userDO.getUserInfoDO().getPhoneNo());
+            userVO.setGender(userDO.getUserInfoDO().getGender());
+            userVO.setBirthday(userDO.getUserInfoDO().getBirthday());
+            userVO.setDescription(userDO.getUserInfoDO().getDescription());
+        }
 
         return userVO;
     }
