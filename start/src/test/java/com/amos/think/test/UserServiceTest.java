@@ -90,31 +90,26 @@ public class UserServiceTest {
     }
 
     @Test
-    public void user_3_Modify() {
-        login();
-    }
-
-    private String login() {
+    public void user_3_Login() {
         //1.prepare
         UserLoginQuery userLoginQuery = new UserLoginQuery();
         userLoginQuery.setUsername(username);
         userLoginQuery.setPassword(password);
 
         //2.execute
-        SingleResponse<UserVO> response = userService.login(userLoginQuery);
-
-        System.out.println(JSON.toJSONString(response));
+        Response response = userService.login(userLoginQuery);
 
         //3.assert success
         Assert.assertTrue(response.isSuccess());
-
-        return response.getData().getId();
     }
 
     @Test
     public void user_4_Modify() {
         //1.prepare
-        String userId = login();
+        SingleResponse<UserVO> userInfoResponse = userService.getUserInfo(username);
+        Assert.assertTrue(userInfoResponse.isSuccess() && userInfoResponse.getData() != null);
+
+        String userId = userInfoResponse.getData().getId();
 
         UserModifyCmd userModify = new UserModifyCmd();
 

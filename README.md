@@ -16,7 +16,9 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 ## 项目案例
 
-用户登录、注册、查询用户列表
+用户注册、登录、修改、查询用户 && 用户列表；
+
+数据库采用内存数据库`h2database`，也即无需准备数据库环境。
 
 ## 项目重构指北
 

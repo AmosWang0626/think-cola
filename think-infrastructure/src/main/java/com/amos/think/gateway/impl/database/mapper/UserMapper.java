@@ -16,7 +16,9 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    UserDO getByUserName(String username);
+    UserDO getPasswordInfo(String username);
+
+    UserDO getUserInfo(String username);
 
     List<UserDO> listByName(UserListByNameQuery query);
 

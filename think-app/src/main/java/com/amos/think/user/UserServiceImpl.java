@@ -12,6 +12,7 @@ import com.amos.think.dto.query.UserListByNameQuery;
 import com.amos.think.dto.query.UserLoginQuery;
 import com.amos.think.user.executor.UserModifyCmdExe;
 import com.amos.think.user.executor.UserRegisterCmdExe;
+import com.amos.think.user.executor.query.UserInfoQueryExe;
 import com.amos.think.user.executor.query.UserListByNameQueryExe;
 import com.amos.think.user.executor.query.UserLoginQueryExe;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,8 @@ public class UserServiceImpl implements IUserService {
     @Resource
     private UserLoginQueryExe userLoginQueryExe;
     @Resource
+    private UserInfoQueryExe userInfoQueryExe;
+    @Resource
     private UserListByNameQueryExe userListByNameQueryExe;
 
     @Override
@@ -53,9 +56,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public SingleResponse<UserVO> login(UserLoginQuery query) {
+    public Response login(UserLoginQuery query) {
 
         return userLoginQueryExe.execute(query);
+    }
+
+    @Override
+    public SingleResponse<UserVO> getUserInfo(String username) {
+
+        return userInfoQueryExe.execute(username);
     }
 
     @Override
