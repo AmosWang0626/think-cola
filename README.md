@@ -30,7 +30,7 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 > 可能有错，欢迎Issue，谢谢
 
-- 不要把领域对象和数据库中的存的xxxDO混为一谈；想一下，领域对象要~~创建人、修改人、~~逻辑删除标识有啥用？
+- 不要把领域对象和数据库中的存的xxxDO混为一谈；想一下，领域对象要 ~~创建人、修改人、~~ 逻辑删除标识有啥用？
 - 一开始不要过度设计，需求增加的过程中，更能看清项目未来的方向；另外，不要把重构一直往后拖，越早重构越可控；
 - xxxDTO 什么时候用呢，DTO 是不是完全可以用 xxxCO、xxxVO 等代替？
 
