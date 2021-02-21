@@ -8,6 +8,11 @@
         <result property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="name" column="name"/>
+        <association property="userInfoDO" resultMap="userInfoDOMap"/>
+    </resultMap>
+
+    <resultMap type="com.amos.think.gateway.impl.database.dataobject.UserInfoDO" id="userInfoDOMap">
+        <result property="id" column="info_id"/>
         <result property="phoneNo" column="phone_no"/>
         <result property="gender" column="gender"/>
         <result property="birthday" column="birthday"/>
@@ -16,10 +21,12 @@
 
     <sql id="FROM_TABLE">from org_user</sql>
 
+    <sql id="FROM_JOIN_TABLE">from org_user user inner join org_user_info info on user.info_id = info.id</sql>
+
     <select id="listByName" resultMap="userDOMap">
         select
-        id, username, name, phone_no, gender, birthday, description
-        <include refid="FROM_TABLE"/>
+        user.id, user.username, user.name, user.info_id, info.phone_no, info.gender, info.birthday, info.description
+        <include refid="FROM_JOIN_TABLE"/>
         <where>
             <if test="name != null">
                 name like CONCAT('%', #{name}, '%')
@@ -40,9 +47,17 @@
         </where>
     </select>
 
-    <select id="getByUserName" resultType="com.amos.think.gateway.impl.database.dataobject.UserDO">
-        select *
+    <select id="getPasswordInfo" resultType="com.amos.think.gateway.impl.database.dataobject.UserDO">
+        select password, salt
         <include refid="FROM_TABLE"/>
+        where username = #{username}
+        and delete_flag = 0
+    </select>
+
+    <select id="getUserInfo" resultType="com.amos.think.gateway.impl.database.dataobject.UserDO">
+        select
+        user.id, user.username, user.name, user.info_id, info.phone_no, info.gender, info.birthday, info.description
+        <include refid="FROM_JOIN_TABLE"/>
         where username = #{username}
         and delete_flag = 0
     </select>

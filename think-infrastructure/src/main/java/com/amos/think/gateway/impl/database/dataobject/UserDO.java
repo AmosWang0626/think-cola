@@ -4,10 +4,7 @@ import com.amos.think.common.api.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import java.time.LocalDate;
+import javax.persistence.*;
 
 /**
  * DESCRIPTION: UserDO
@@ -41,12 +38,11 @@ public class UserDO extends BaseDO {
      */
     private String name;
 
-    private String phoneNo;
-
-    private Integer gender;
-
-    private LocalDate birthday;
-
-    private String description;
+    /**
+     * 附加信息
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "info_id")
+    private UserInfoDO userInfoDO;
 
 }
