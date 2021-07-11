@@ -62,6 +62,23 @@ public class UserConvertor {
         return userDO;
     }
 
+    public static UserEntity toEntity(UserDO userDO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(userDO.getId());
+        userEntity.setUsername(userDO.getUsername());
+        userEntity.setPassword(userDO.getPassword());
+        userEntity.setSalt(userDO.getSalt());
+        userEntity.setName(userDO.getName());
+        if (userDO.getUserInfoDO() != null) {
+            userEntity.setPhoneNo(userDO.getUserInfoDO().getPhoneNo());
+            userEntity.setGender(userDO.getUserInfoDO().getGender());
+            userEntity.setBirthday(userDO.getUserInfoDO().getBirthday());
+            userEntity.setDescription(userDO.getUserInfoDO().getDescription());
+        }
+
+        return userEntity;
+    }
+
     public static void mergeDataObject(UserEntity userEntity, UserDO userDO) {
         userDO.setUsername(userEntity.getUsername());
         userDO.setName(userEntity.getName());
@@ -71,17 +88,15 @@ public class UserConvertor {
         userDO.getUserInfoDO().setDescription(userEntity.getDescription());
     }
 
-    public static UserVO toValueObject(UserDO userDO) {
+    public static UserVO toValueObject(UserEntity userEntity) {
         UserVO userVO = new UserVO();
-        userVO.setId(userDO.getId());
-        userVO.setUsername(userDO.getUsername());
-        userVO.setName(userDO.getName());
-        if (userDO.getUserInfoDO() != null) {
-            userVO.setPhoneNo(userDO.getUserInfoDO().getPhoneNo());
-            userVO.setGender(userDO.getUserInfoDO().getGender());
-            userVO.setBirthday(userDO.getUserInfoDO().getBirthday());
-            userVO.setDescription(userDO.getUserInfoDO().getDescription());
-        }
+        userVO.setId(userEntity.getId());
+        userVO.setUsername(userEntity.getUsername());
+        userVO.setName(userEntity.getName());
+        userVO.setPhoneNo(userEntity.getPhoneNo());
+        userVO.setGender(userEntity.getGender());
+        userVO.setBirthday(userEntity.getBirthday());
+        userVO.setDescription(userEntity.getDescription());
 
         return userVO;
     }

@@ -51,18 +51,16 @@ public class UserServiceTest {
     @Test
     public void user_1_Register() {
         //1.prepare
-        UserRegisterCmd registerCmd = new UserRegisterCmd();
-
         UserRegisterCO registerCO = new UserRegisterCO();
         registerCO.setName("amos.wang");
         registerCO.setUsername(username);
         registerCO.setPassword(password);
-        registerCO.setPhoneNo("189****8861");
+        registerCO.setPhoneNo("189****8888");
         registerCO.setGender(1);
-        registerCO.setBirthday(LocalDate.of(1996, 6, 26));
+        registerCO.setBirthday(LocalDate.of(2000, 6, 26));
         registerCO.setDescription("https://amos.wang/");
 
-        registerCmd.setUserRegister(registerCO);
+        UserRegisterCmd registerCmd = UserRegisterCmd.builder().userRegister(registerCO).build();
 
         //2.execute
         Response response = userService.register(registerCmd);
@@ -74,13 +72,11 @@ public class UserServiceTest {
     @Test
     public void user_2_RegisterByRepeatUsername() {
         //1.prepare
-        UserRegisterCmd registerCmd = new UserRegisterCmd();
-
         UserRegisterCO registerCO = new UserRegisterCO();
         registerCO.setUsername(username);
         registerCO.setPassword(password);
 
-        registerCmd.setUserRegister(registerCO);
+        UserRegisterCmd registerCmd = UserRegisterCmd.builder().userRegister(registerCO).build();
 
         //2.execute
         Response response = userService.register(registerCmd);
@@ -117,9 +113,9 @@ public class UserServiceTest {
         userModifyCO.setId(userId);
         userModifyCO.setName("小道远");
         userModifyCO.setUsername(username);
-        userModifyCO.setPhoneNo("189----8861");
+        userModifyCO.setPhoneNo("189----8888");
         userModifyCO.setGender(0);
-        userModifyCO.setBirthday(LocalDate.of(1996, 5, 11));
+        userModifyCO.setBirthday(LocalDate.of(2000, 5, 11));
         userModifyCO.setDescription("https://github.com/AmosWang0626");
 
         userModify.setUserModify(userModifyCO);
@@ -134,8 +130,7 @@ public class UserServiceTest {
     @Test
     public void user_5_listByName() {
         //1.prepare
-        UserListByNameQuery query = new UserListByNameQuery();
-        query.setName(null);
+        UserListByNameQuery query = UserListByNameQuery.builder().name(null).build();
 
         //2.execute
         MultiResponse<UserVO> response = userService.listByName(query);

@@ -6,7 +6,6 @@ import com.amos.think.domain.user.gateway.UserGateway;
 import com.amos.think.dto.UserModifyCmd;
 import com.amos.think.dto.clientobject.UserModifyCO;
 import com.amos.think.dto.data.ErrorCode;
-import com.amos.think.gateway.impl.database.mapper.UserMapper;
 import com.amos.think.user.validator.UserValidator;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +21,6 @@ import javax.annotation.Resource;
 public class UserModifyCmdExe {
 
     @Resource
-    private UserMapper userMapper;
-    @Resource
     private UserGateway userGateway;
 
     public Response execute(UserModifyCmd cmd) {
@@ -32,7 +29,7 @@ public class UserModifyCmdExe {
         UserValidator.checkUserModify(userModify);
 
         // check 用户名是否重复
-        if (userMapper.existUsername(userModify.getId(), userModify.getUsername())) {
+        if (userGateway.existUsername(userModify.getId(), userModify.getUsername())) {
             return Response.buildFailure(ErrorCode.B_USER_usernameRepeat.getErrCode(),
                     ErrorCode.B_USER_usernameRepeat.getErrDesc());
         }

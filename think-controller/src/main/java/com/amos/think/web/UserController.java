@@ -33,24 +33,17 @@ public class UserController {
 
     @PostMapping(value = "/register")
     public Response register(@RequestBody UserRegisterCO userRegister) {
-        UserRegisterCmd userRegisterCmd = new UserRegisterCmd();
-        userRegisterCmd.setUserRegister(userRegister);
-
-        return userService.register(userRegisterCmd);
+        return userService.register(UserRegisterCmd.builder().userRegister(userRegister).build());
     }
 
     @PostMapping(value = "/login")
     public Response login(@RequestBody UserLoginQuery userLoginQuery) {
-
         return userService.login(userLoginQuery);
     }
 
     @GetMapping(value = "/list")
     public MultiResponse<UserVO> list(@RequestParam(required = false) String name) {
-        UserListByNameQuery query = new UserListByNameQuery();
-        query.setName(name);
-
-        return userService.listByName(query);
+        return userService.listByName(UserListByNameQuery.builder().name(name).build());
     }
 
 }

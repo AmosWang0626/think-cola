@@ -5,13 +5,17 @@ import com.amos.think.common.util.RandomUtil;
 import com.amos.think.convertor.UserConvertor;
 import com.amos.think.domain.user.gateway.UserGateway;
 import com.amos.think.domain.user.model.UserEntity;
+import com.amos.think.dto.query.UserListByNameQuery;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;
+import com.amos.think.gateway.impl.database.mapper.UserMapper;
 import com.amos.think.gateway.impl.database.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * DESCRIPTION: UserGatewayImpl
@@ -22,6 +26,8 @@ import java.util.Optional;
 @Component("userGateway")
 public class UserGatewayImpl implements UserGateway {
 
+    @Resource
+    private UserMapper userMapper;
     @Resource
     private UserRepository userRepository;
 
@@ -50,6 +56,28 @@ public class UserGatewayImpl implements UserGateway {
         }
 
         userRepository.save(userDO);
+    }
+
+    @Override
+    public UserEntity getPasswordInfo(String username) {
+        return UserConvertor.toEntity(userMapper.getPasswordInfo(username));
+    }
+
+    @Override
+    public UserEntity getUserInfo(String username) {
+        return UserConvertor.toEntity(userMapper.getUserInfo(username));
+    }
+
+    @Override
+    public List<UserEntity> listByName(UserListByNameQuery query) {
+        return userMapper.listByName(query).stream()
+                .map(UserConvertor::toEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean existUsername(String userId, String username) {
+        return userMapper.existUsername(userId, username);
     }
 
 }

@@ -2,6 +2,7 @@ package com.amos.think.dto;
 
 import com.alibaba.cola.dto.Command;
 import com.amos.think.dto.clientobject.UserRegisterCO;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 public class UserRegisterCmd extends Command {
 
     /**

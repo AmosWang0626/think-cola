@@ -2,10 +2,10 @@ package com.amos.think.user.executor.query;
 
 import com.alibaba.cola.dto.SingleResponse;
 import com.amos.think.convertor.UserConvertor;
+import com.amos.think.domain.user.gateway.UserGateway;
+import com.amos.think.domain.user.model.UserEntity;
 import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.data.UserVO;
-import com.amos.think.gateway.impl.database.dataobject.UserDO;
-import com.amos.think.gateway.impl.database.mapper.UserMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -22,16 +22,16 @@ import java.util.Objects;
 public class UserInfoQueryExe {
 
     @Resource
-    private UserMapper userMapper;
+    private UserGateway userGateway;
 
     public SingleResponse<UserVO> execute(String username) {
-        UserDO userDO = userMapper.getUserInfo(username);
-        if (Objects.isNull(userDO)) {
+        UserEntity userEntity = userGateway.getUserInfo(username);
+        if (Objects.isNull(userEntity)) {
             return SingleResponse.buildFailure(
                     ErrorCode.B_USER_usernameError.getErrCode(), ErrorCode.B_USER_usernameError.getErrDesc());
         }
 
-        return SingleResponse.of(UserConvertor.toValueObject(userDO));
+        return SingleResponse.of(UserConvertor.toValueObject(userEntity));
     }
 
 }

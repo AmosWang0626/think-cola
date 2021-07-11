@@ -1,6 +1,7 @@
 package com.amos.think.dto.query;
 
 import com.alibaba.cola.dto.Query;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,6 +13,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 public class UserListByNameQuery extends Query {
 
     private String name;
