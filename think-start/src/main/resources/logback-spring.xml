@@ -2,7 +2,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
 
     <!--定义参数,后面可以通过${APP_NAME}使用-->
-    <property name="APP_NAME" value="start" />
+    <property name="APP_NAME" value="think-cola" />
     <property name="LOG_PATH" value="${user.home}/${APP_NAME}/logs" />
     <property name="LOG_FILE" value="${LOG_PATH}/application.log" />
 

@@ -9,9 +9,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>start</artifactId>
+    <artifactId>think-start</artifactId>
     <packaging>jar</packaging>
-    <name>start</name>
+    <name>think-start</name>
 
     <dependencies>
         <dependency>

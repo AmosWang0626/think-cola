@@ -7,7 +7,7 @@
     <artifactId>think</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>think-cola</name>
+    <name>think</name>
 
     <properties>
         <!--<skipTests>true</skipTests>-->
@@ -23,12 +23,12 @@
     </properties>
 
     <modules>
-        <module>think-controller</module>
-        <module>think-client</module>
         <module>think-app</module>
+        <module>think-client</module>
+        <module>think-controller</module>
         <module>think-domain</module>
         <module>think-infrastructure</module>
-        <module>start</module>
+        <module>think-start</module>
     </modules>
 
     <dependencyManagement>
