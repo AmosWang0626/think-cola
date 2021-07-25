@@ -1,7 +1,7 @@
 package com.amos.think.common.util;
 
 /**
- * DESCRIPTION: NumberConstant
+ * NumberConstant
  *
  * @author <a href="mailto:amos.wang@xiaoi.com">amos.wang</a>
  * @date 2/18/2020

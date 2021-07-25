@@ -12,8 +12,7 @@ import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
- * PROJECT: think
- * DESCRIPTION: 用户信息查询
+ * 用户信息查询
  *
  * @author daoyuan
  * @date 2021/2/14 23:27

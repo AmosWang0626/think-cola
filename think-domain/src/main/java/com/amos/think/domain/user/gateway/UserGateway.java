@@ -6,7 +6,7 @@ import com.amos.think.dto.query.UserListByNameQuery;
 import java.util.List;
 
 /**
- * DESCRIPTION: User Gateway
+ * User Gateway
  *
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
  * @date 2021/1/8

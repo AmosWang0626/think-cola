@@ -10,7 +10,7 @@ import com.amos.think.dto.query.UserListByNameQuery;
 import com.amos.think.dto.query.UserLoginQuery;
 
 /**
- * DESCRIPTION: 用户相关
+ * 用户相关
  *
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
  * @date 2021/1/8

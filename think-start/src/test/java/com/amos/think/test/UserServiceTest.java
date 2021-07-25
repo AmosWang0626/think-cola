@@ -27,7 +27,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 /**
- * DESCRIPTION: UserServiceTest
+ * UserServiceTest
  *
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
  * @date 2021/1/9

@@ -7,7 +7,7 @@ import com.amos.think.dto.data.UserVO;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * DESCRIPTION: UserValidator
+ * UserValidator
  *
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
  * @date 2021/1/10
