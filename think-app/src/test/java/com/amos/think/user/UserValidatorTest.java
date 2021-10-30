@@ -9,7 +9,7 @@ public class UserValidatorTest {
     @Test
     public void testValidation() {
         UserRegisterCO userRegisterCO = new UserRegisterCO();
-        userRegisterCO.setId("123456");
+        userRegisterCO.setId(12345L);
         userRegisterCO.setUsername("amos");
         userRegisterCO.setPassword("");
 

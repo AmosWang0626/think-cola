@@ -6,6 +6,7 @@ import com.amos.think.dto.clientobject.UserRegisterCO;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;
 import com.amos.think.gateway.impl.database.dataobject.UserInfoDO;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * UserConvertor
@@ -42,7 +43,36 @@ public class UserConvertor {
         return userEntity;
     }
 
-    public static UserDO toDataObject(UserEntity userEntity) {
+    public static UserEntity toEntity(UserDO userDO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(userDO.getId());
+        userEntity.setUsername(userDO.getUsername());
+        userEntity.setPassword(userDO.getPassword());
+        userEntity.setSalt(userDO.getSalt());
+        userEntity.setName(userDO.getName());
+
+        return userEntity;
+    }
+
+    public static UserEntity toEntity(UserDO userDO, UserInfoDO userInfoDO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(userDO.getId());
+        userEntity.setUsername(userDO.getUsername());
+        userEntity.setPassword(userDO.getPassword());
+        userEntity.setSalt(userDO.getSalt());
+        userEntity.setName(userDO.getName());
+
+        if (userInfoDO != null) {
+            userEntity.setPhoneNo(userInfoDO.getPhoneNo());
+            userEntity.setGender(userInfoDO.getGender());
+            userEntity.setBirthday(userInfoDO.getBirthday());
+            userEntity.setDescription(userInfoDO.getDescription());
+        }
+
+        return userEntity;
+    }
+
+    public static ImmutablePair<UserDO, UserInfoDO> toAddUserDO(UserEntity userEntity) {
         UserDO userDO = new UserDO();
         userDO.setId(userEntity.getId());
         userDO.setUsername(userEntity.getUsername());
@@ -57,42 +87,24 @@ public class UserConvertor {
         userInfoDO.setBirthday(userEntity.getBirthday());
         userInfoDO.setDescription(userEntity.getDescription());
 
-        userDO.setUserInfoDO(userInfoDO);
-
-        return userDO;
+        return new ImmutablePair<>(userDO, userInfoDO);
     }
 
-    public static UserEntity toEntity(UserDO userDO) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(userDO.getId());
-        userEntity.setUsername(userDO.getUsername());
-        userEntity.setPassword(userDO.getPassword());
-        userEntity.setSalt(userDO.getSalt());
-        userEntity.setName(userDO.getName());
-        if (userDO.getUserInfoDO() != null) {
-            userEntity.setPhoneNo(userDO.getUserInfoDO().getPhoneNo());
-            userEntity.setGender(userDO.getUserInfoDO().getGender());
-            userEntity.setBirthday(userDO.getUserInfoDO().getBirthday());
-            userEntity.setDescription(userDO.getUserInfoDO().getDescription());
-        }
-
-        return userEntity;
-    }
-
-    public static void mergeDataObject(UserEntity userEntity, UserDO userDO) {
-        userDO.setUsername(userEntity.getUsername());
+    public static void toModifyUserDO(UserEntity userEntity, UserDO userDO, UserInfoDO userInfoDO) {
         userDO.setName(userEntity.getName());
-        userDO.getUserInfoDO().setPhoneNo(userEntity.getPhoneNo());
-        userDO.getUserInfoDO().setGender(userEntity.getGender());
-        userDO.getUserInfoDO().setBirthday(userEntity.getBirthday());
-        userDO.getUserInfoDO().setDescription(userEntity.getDescription());
+        userDO.setUsername(userEntity.getUsername());
+
+        userInfoDO.setPhoneNo(userEntity.getPhoneNo());
+        userInfoDO.setGender(userEntity.getGender());
+        userInfoDO.setBirthday(userEntity.getBirthday());
+        userInfoDO.setDescription(userEntity.getDescription());
     }
 
     public static UserVO toValueObject(UserEntity userEntity) {
         UserVO userVO = new UserVO();
         userVO.setId(userEntity.getId());
-        userVO.setUsername(userEntity.getUsername());
         userVO.setName(userEntity.getName());
+        userVO.setUsername(userEntity.getUsername());
         userVO.setPhoneNo(userEntity.getPhoneNo());
         userVO.setGender(userEntity.getGender());
         userVO.setBirthday(userEntity.getBirthday());

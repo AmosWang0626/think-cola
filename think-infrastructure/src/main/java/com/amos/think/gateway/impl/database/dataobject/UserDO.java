@@ -4,8 +4,6 @@ import com.amos.think.common.api.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
-
 /**
  * UserDO
  *
@@ -14,10 +12,6 @@ import javax.persistence.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity
-@Table(name = "org_user", indexes = {
-        @Index(columnList = "username")
-})
 public class UserDO extends BaseDO {
 
     /**
@@ -39,10 +33,8 @@ public class UserDO extends BaseDO {
     private String name;
 
     /**
-     * 附加信息
+     * 附加信息主键ID
      */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "info_id")
-    private UserInfoDO userInfoDO;
+    private Long infoId;
 
 }

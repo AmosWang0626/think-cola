@@ -25,7 +25,7 @@ public class UserListByNameQueryExe {
     private UserGateway userGateway;
 
     public MultiResponse<UserVO> execute(UserListByNameQuery query) {
-        List<UserEntity> userEntities = userGateway.listByName(query);
+        List<UserEntity> userEntities = userGateway.findByName(query);
         List<UserVO> userVOList = userEntities.stream()
                 .map(UserConvertor::toValueObject)
                 .collect(Collectors.toList());

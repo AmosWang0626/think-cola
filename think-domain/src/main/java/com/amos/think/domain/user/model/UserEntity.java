@@ -13,7 +13,12 @@ import java.time.LocalDate;
 @Data
 public class UserEntity {
 
-    private String id;
+    private Long id;
+
+    /**
+     * 姓名
+     */
+    private String name;
 
     /**
      * 用户名
@@ -27,11 +32,6 @@ public class UserEntity {
      * 密码盐
      */
     private String salt;
-
-    /**
-     * 姓名
-     */
-    private String name;
 
     private String phoneNo;
 

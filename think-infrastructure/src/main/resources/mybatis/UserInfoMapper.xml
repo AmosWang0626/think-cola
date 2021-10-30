@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amos.think.gateway.impl.database.mapper.UserInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.amos.think.gateway.impl.database.dataobject.UserInfoDO">
+        <result property="id" column="id"/>
+        <result property="phoneNo" column="phone_no"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="description" column="description"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO org_user_info
+        ( phone_no, gender, birthday, description )
+        VALUES
+        ( #{phoneNo}, #{gender}, #{birthday}, #{description} )
+    </insert>
+
+    <insert id="update">
+        UPDATE org_user_info
+        <set>
+            <if test="phoneNo != null">
+                phone_no = #{phoneNo},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </insert>
+
+    <select id="findById" resultMap="BaseResultMap">
+        SELECT
+        id, phone_no, gender, birthday, description
+        FROM org_user_info
+        WHERE id = #{id}
+    </select>
+
+</mapper>
