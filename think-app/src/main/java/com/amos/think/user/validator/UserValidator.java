@@ -6,6 +6,8 @@ import com.amos.think.dto.clientobject.UserRegisterCO;
 import com.amos.think.dto.data.UserVO;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 /**
  * UserValidator
  *
@@ -34,7 +36,7 @@ public class UserValidator {
     }
 
     private static void checkPassword(UserRegisterCO co) {
-        Assert.isFalse(StringUtils.isBlank(co.getId()) && StringUtils.isBlank(co.getPassword()), "密码不能为空");
+        Assert.isFalse(Objects.isNull(co.getId()) && StringUtils.isBlank(co.getPassword()), "密码不能为空");
     }
 
 }

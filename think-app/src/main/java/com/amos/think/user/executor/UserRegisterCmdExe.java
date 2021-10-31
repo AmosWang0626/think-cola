@@ -29,7 +29,7 @@ public class UserRegisterCmdExe {
         UserValidator.checkUserRegister(userRegister);
 
         // check 用户名是否重复
-        if (userGateway.existUsername(userRegister.getId(), userRegister.getUsername())) {
+        if (userGateway.checkByUsername(userRegister.getId(), userRegister.getUsername())) {
             return Response.buildFailure(ErrorCode.B_USER_usernameRepeat.getErrCode(),
                     ErrorCode.B_USER_usernameRepeat.getErrDesc());
         }

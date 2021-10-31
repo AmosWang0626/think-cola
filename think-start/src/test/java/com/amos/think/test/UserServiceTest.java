@@ -13,6 +13,7 @@ import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.dto.query.UserListByNameQuery;
 import com.amos.think.dto.query.UserLoginQuery;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -32,6 +33,7 @@ import java.util.UUID;
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
  * @date 2021/1/9
  */
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -40,12 +42,12 @@ public class UserServiceTest {
     @Autowired
     private IUserService userService;
 
-    private static final String username = UUID.randomUUID().toString();
+    private static final String username = "AMOS_" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     private static final String password = "666666";
 
     @Before
     public void setUp() {
-        System.out.println("test username is [" + username + "]");
+        log.info("test username is [" + username + "]");
     }
 
     @Test
@@ -55,9 +57,9 @@ public class UserServiceTest {
         registerCO.setName("amos.wang");
         registerCO.setUsername(username);
         registerCO.setPassword(password);
-        registerCO.setPhoneNo("189****8888");
+        registerCO.setPhoneNo("18907378888");
         registerCO.setGender(1);
-        registerCO.setBirthday(LocalDate.of(2000, 6, 26));
+        registerCO.setBirthday(LocalDate.of(2000, 1, 1));
         registerCO.setDescription("https://amos.wang/");
 
         UserRegisterCmd registerCmd = UserRegisterCmd.builder().userRegister(registerCO).build();
@@ -105,7 +107,7 @@ public class UserServiceTest {
         SingleResponse<UserVO> userInfoResponse = userService.getUserInfo(username);
         Assert.assertTrue(userInfoResponse.isSuccess() && userInfoResponse.getData() != null);
 
-        String userId = userInfoResponse.getData().getId();
+        Long userId = userInfoResponse.getData().getId();
 
         UserModifyCmd userModify = new UserModifyCmd();
 
@@ -113,9 +115,9 @@ public class UserServiceTest {
         userModifyCO.setId(userId);
         userModifyCO.setName("小道远");
         userModifyCO.setUsername(username);
-        userModifyCO.setPhoneNo("189----8888");
+        userModifyCO.setPhoneNo("189****8888");
         userModifyCO.setGender(0);
-        userModifyCO.setBirthday(LocalDate.of(2000, 5, 11));
+        userModifyCO.setBirthday(LocalDate.of(2000, 6, 26));
         userModifyCO.setDescription("https://github.com/AmosWang0626");
 
         userModify.setUserModify(userModifyCO);
@@ -130,7 +132,7 @@ public class UserServiceTest {
     @Test
     public void user_5_listByName() {
         //1.prepare
-        UserListByNameQuery query = UserListByNameQuery.builder().name(null).build();
+        UserListByNameQuery query = UserListByNameQuery.builder().build();
 
         //2.execute
         MultiResponse<UserVO> response = userService.listByName(query);

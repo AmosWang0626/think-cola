@@ -24,7 +24,7 @@ public class UserInfoQueryExe {
     private UserGateway userGateway;
 
     public SingleResponse<UserVO> execute(String username) {
-        UserEntity userEntity = userGateway.getUserInfo(username);
+        UserEntity userEntity = userGateway.findByUsername(username);
         if (Objects.isNull(userEntity)) {
             return SingleResponse.buildFailure(
                     ErrorCode.B_USER_usernameError.getErrCode(), ErrorCode.B_USER_usernameError.getErrDesc());

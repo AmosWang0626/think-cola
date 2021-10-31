@@ -4,14 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.amos.think.gateway.impl.database.mapper.UserMapper">
 
-    <resultMap type="com.amos.think.gateway.impl.database.dataobject.UserDO" id="userDOMap">
+    <resultMap id="userDOMap" type="com.amos.think.gateway.impl.database.dataobject.UserDO">
         <result property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="name" column="name"/>
-        <association property="userInfoDO" resultMap="userInfoDOMap"/>
+        <result property="infoId" column="info_id"/>
+        <result property="creator" column="creator"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="modifier" column="modifier"/>
+        <result property="gmtModify" column="gmt_modify"/>
+        <result property="deleteFlag" column="delete_flag"/>
     </resultMap>
 
-    <resultMap type="com.amos.think.gateway.impl.database.dataobject.UserInfoDO" id="userInfoDOMap">
+    <resultMap id="userInfoDOMap" type="com.amos.think.gateway.impl.database.dataobject.UserInfoDO">
         <result property="id" column="info_id"/>
         <result property="phoneNo" column="phone_no"/>
         <result property="gender" column="gender"/>
@@ -19,14 +24,66 @@
         <result property="description" column="description"/>
     </resultMap>
 
-    <sql id="FROM_TABLE">from org_user</sql>
+    <resultMap id="userEntityMap" type="com.amos.think.domain.user.model.UserEntity">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="username" column="username"/>
+        <result property="phoneNo" column="phone_no"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="description" column="description"/>
+    </resultMap>
 
-    <sql id="FROM_JOIN_TABLE">from org_user user inner join org_user_info info on user.info_id = info.id</sql>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO org_user
+        ( username, name, password, salt, info_id,
+        creator, gmt_create, modifier, gmt_modify, delete_flag )
+        VALUES
+        ( #{username}, #{name}, #{password}, #{salt}, #{infoId},
+        #{creator}, #{gmtCreate}, #{modifier}, #{gmtModify}, #{deleteFlag} )
+    </insert>
 
-    <select id="listByName" resultMap="userDOMap">
+    <insert id="update" useGeneratedKeys="true" keyProperty="id">
+        UPDATE org_user
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="modifier != null">
+                modifier = #{modifier},
+            </if>
+            <if test="gmtModify != null">
+                gmt_modify = #{gmtModify},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </insert>
+
+    <select id="findById" resultMap="userDOMap">
+        select id, username, name, info_id
+        from org_user
+        where id = #{id}
+        and delete_flag = 0
+    </select>
+
+    <select id="findByUsername" resultMap="userDOMap">
+        select id, username, name, info_id
+        from org_user
+        where username = #{username}
+        and delete_flag = 0
+    </select>
+
+    <select id="findByName" resultMap="userEntityMap">
         select
-        user.id, user.username, user.name, user.info_id, info.phone_no, info.gender, info.birthday, info.description
-        <include refid="FROM_JOIN_TABLE"/>
+        user.id, user.username, user.name, info.phone_no, info.gender, info.birthday, info.description
+        from org_user user
+        inner join org_user_info info on user.info_id = info.id
         <where>
             <if test="name != null">
                 name like CONCAT('%', #{name}, '%')
@@ -35,9 +92,9 @@
         </where>
     </select>
 
-    <select id="existUsername" resultType="java.lang.Boolean">
+    <select id="existByUsername" resultType="java.lang.Boolean">
         select count(*)
-        <include refid="FROM_TABLE"/>
+        from org_user
         <where>
             username = #{username}
             <if test="userId != null">
@@ -47,17 +104,9 @@
         </where>
     </select>
 
-    <select id="getPasswordInfo" resultType="com.amos.think.gateway.impl.database.dataobject.UserDO">
+    <select id="findPasswordInfo" resultType="com.amos.think.gateway.impl.database.dataobject.UserDO">
         select password, salt
-        <include refid="FROM_TABLE"/>
-        where username = #{username}
-        and delete_flag = 0
-    </select>
-
-    <select id="getUserInfo" resultType="com.amos.think.gateway.impl.database.dataobject.UserDO">
-        select
-        user.id, user.username, user.name, user.info_id, info.phone_no, info.gender, info.birthday, info.description
-        <include refid="FROM_JOIN_TABLE"/>
+        from org_user
         where username = #{username}
         and delete_flag = 0
     </select>

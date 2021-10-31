@@ -26,7 +26,7 @@ public interface UserGateway {
      * @param username 用户名
      * @return 密码、密码盐
      */
-    UserEntity getPasswordInfo(String username);
+    UserEntity findPasswordInfo(String username);
 
     /**
      * 获取用户信息
@@ -34,7 +34,7 @@ public interface UserGateway {
      * @param username 用户名
      * @return 用户实体
      */
-    UserEntity getUserInfo(String username);
+    UserEntity findByUsername(String username);
 
     /**
      * 根据条件查询
@@ -42,7 +42,7 @@ public interface UserGateway {
      * @param query 用户名等
      * @return List 用户实体
      */
-    List<UserEntity> listByName(UserListByNameQuery query);
+    List<UserEntity> findByName(UserListByNameQuery query);
 
     /**
      * 判断用户名是否已存在
@@ -51,6 +51,6 @@ public interface UserGateway {
      * @param username 用户名
      * @return true-已存在
      */
-    Boolean existUsername(String userId, String username);
+    Boolean checkByUsername(Long userId, String username);
 
 }

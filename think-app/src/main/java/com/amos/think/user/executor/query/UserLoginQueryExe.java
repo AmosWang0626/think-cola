@@ -24,7 +24,7 @@ public class UserLoginQueryExe {
     private UserGateway userGateway;
 
     public Response execute(UserLoginQuery query) {
-        UserEntity byUserName = userGateway.getPasswordInfo(query.getUsername());
+        UserEntity byUserName = userGateway.findPasswordInfo(query.getUsername());
         if (byUserName == null) {
             return SingleResponse.buildFailure(ErrorCode.B_USER_passwordError.getErrCode(), ErrorCode.B_USER_passwordError.getErrDesc());
         }

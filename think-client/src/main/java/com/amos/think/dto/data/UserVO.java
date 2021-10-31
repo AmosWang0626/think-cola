@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 public class UserVO {
 
-    private String id;
+    private Long id;
 
     /**
      * 用户名

@@ -7,15 +7,18 @@ import com.amos.think.domain.user.gateway.UserGateway;
 import com.amos.think.domain.user.model.UserEntity;
 import com.amos.think.dto.query.UserListByNameQuery;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;
+import com.amos.think.gateway.impl.database.dataobject.UserInfoDO;
+import com.amos.think.gateway.impl.database.mapper.UserInfoMapper;
 import com.amos.think.gateway.impl.database.mapper.UserMapper;
-import com.amos.think.gateway.impl.database.repository.UserRepository;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * UserGatewayImpl
@@ -29,55 +32,93 @@ public class UserGatewayImpl implements UserGateway {
     @Resource
     private UserMapper userMapper;
     @Resource
-    private UserRepository userRepository;
+    private UserInfoMapper userInfoMapper;
 
     @Override
+    @Transactional(rollbackFor = Throwable.class)
     public void save(UserEntity userEntity) {
-        UserDO userDO = null;
-        if (StringUtils.isNotBlank(userEntity.getId())) {
-            Optional<UserDO> byId = userRepository.findById(userEntity.getId());
-            if (byId.isPresent()) {
-
-                // 更新
-                userDO = byId.get();
-                UserConvertor.mergeDataObject(userEntity, userDO);
-            }
+        // 新增
+        if (Objects.isNull(userEntity.getId())) {
+            addUser(userEntity);
+            return;
         }
 
-        if (userDO == null) {
-            // 生成密码盐
-            String salt = RandomUtil.generateLetterString(8);
-            String encryptPassword = DesSecretUtil.encrypt(userEntity.getPassword(), salt);
-            userEntity.setSalt(salt);
-            userEntity.setPassword(encryptPassword);
+        // 修改
+        modifyUser(userEntity);
+    }
 
-            // 新增
-            userDO = UserConvertor.toDataObject(userEntity);
+    @Override
+    public UserEntity findPasswordInfo(String username) {
+        return UserConvertor.toEntity(userMapper.findPasswordInfo(username));
+    }
+
+    @Override
+    public UserEntity findByUsername(String username) {
+        UserDO userDO = userMapper.findByUsername(username);
+        UserInfoDO userInfoDO = null;
+        if (Objects.nonNull(userDO)) {
+            userInfoDO = userInfoMapper.findById(userDO.getInfoId());
         }
 
-        userRepository.save(userDO);
+        return UserConvertor.toEntity(userDO, userInfoDO);
     }
 
     @Override
-    public UserEntity getPasswordInfo(String username) {
-        return UserConvertor.toEntity(userMapper.getPasswordInfo(username));
+    public List<UserEntity> findByName(UserListByNameQuery query) {
+        return userMapper.findByName(query);
     }
 
     @Override
-    public UserEntity getUserInfo(String username) {
-        return UserConvertor.toEntity(userMapper.getUserInfo(username));
+    public Boolean checkByUsername(Long userId, String username) {
+        return userMapper.existByUsername(userId, username);
     }
 
-    @Override
-    public List<UserEntity> listByName(UserListByNameQuery query) {
-        return userMapper.listByName(query).stream()
-                .map(UserConvertor::toEntity)
-                .collect(Collectors.toList());
+    /**
+     * 新增用户
+     */
+    private void addUser(UserEntity userEntity) {
+        // 生成密码盐
+        String salt = RandomUtil.generateLetterString(8);
+        String encryptPassword = DesSecretUtil.encrypt(userEntity.getPassword(), salt);
+        userEntity.setSalt(salt);
+        userEntity.setPassword(encryptPassword);
+
+        // 初始化用户信息
+        ImmutablePair<UserDO, UserInfoDO> pair = UserConvertor.toAddUserDO(userEntity);
+        UserDO userDO = pair.getLeft();
+        UserInfoDO userInfoDO = pair.getRight();
+
+        // 1. 先保存用户信息
+        userInfoMapper.insert(userInfoDO);
+
+        // 2. 获取 userInfoId 关联 userDO
+        userDO.setInfoId(userInfoDO.getId());
+        userDO.setDeleteFlag(false);
+        userDO.setGmtCreate(LocalDateTime.now());
+        userMapper.insert(userDO);
     }
 
-    @Override
-    public Boolean existUsername(String userId, String username) {
-        return userMapper.existUsername(userId, username);
+    /**
+     * 修改用户
+     */
+    private void modifyUser(UserEntity userEntity) {
+        Optional<UserDO> findById = userMapper.findById(userEntity.getId());
+        if (!findById.isPresent()) {
+            throw new RuntimeException("用户ID错误!");
+        }
+
+        UserDO userDO = findById.get();
+        UserInfoDO userInfoDO = userInfoMapper.findById(userDO.getInfoId());
+
+        // 更新用户信息
+        UserConvertor.toModifyUserDO(userEntity, userDO, userInfoDO);
+
+        // 1. 先保存userInfoDO
+        userInfoMapper.update(userInfoDO);
+
+        // 2. 再保存userDO
+        userDO.setGmtModify(LocalDateTime.now());
+        userMapper.update(userDO);
     }
 
 }

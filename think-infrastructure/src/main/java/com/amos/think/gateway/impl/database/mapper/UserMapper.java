@@ -1,11 +1,13 @@
 package com.amos.think.gateway.impl.database.mapper;
 
+import com.amos.think.domain.user.model.UserEntity;
 import com.amos.think.dto.query.UserListByNameQuery;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User Mapper
@@ -16,12 +18,18 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    UserDO getPasswordInfo(String username);
+    int insert(UserDO userDO);
 
-    UserDO getUserInfo(String username);
+    int update(UserDO userDO);
 
-    List<UserDO> listByName(UserListByNameQuery query);
+    Optional<UserDO> findById(Long id);
 
-    Boolean existUsername(@Param("userId") String userId, @Param("username") String username);
+    UserDO findPasswordInfo(String username);
+
+    UserDO findByUsername(String username);
+
+    List<UserEntity> findByName(UserListByNameQuery query);
+
+    Boolean existByUsername(@Param("userId") Long userId, @Param("username") String username);
 
 }
