@@ -4,9 +4,9 @@
 
 ## 技术栈
 
-- Spring | JPA | MyBatis
-- JPA 做自动建表、基础增删改查
-- MyBatis 做复杂查询
+- Spring | MyBatis
+- dev环境使用h2, test环境使用mysql
+- dev环境会自动初始化数据库、数据库表；test环境会自动初始化数据库表，需要自己准备数据库
 
 ## 小技巧
 
