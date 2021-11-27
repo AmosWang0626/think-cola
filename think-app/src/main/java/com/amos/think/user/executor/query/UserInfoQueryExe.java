@@ -1,11 +1,12 @@
 package com.amos.think.user.executor.query;
 
 import com.alibaba.cola.dto.SingleResponse;
-import com.amos.think.convertor.UserConvertor;
+import com.amos.think.common.exception.BizException;
 import com.amos.think.domain.user.gateway.UserGateway;
 import com.amos.think.domain.user.model.UserEntity;
 import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.data.UserVO;
+import com.amos.think.user.assembler.UserAssembler;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -23,14 +24,13 @@ public class UserInfoQueryExe {
     @Resource
     private UserGateway userGateway;
 
-    public SingleResponse<UserVO> execute(String username) {
-        UserEntity userEntity = userGateway.findByUsername(username);
+    public SingleResponse<UserVO> execute(Long id) {
+        UserEntity userEntity = userGateway.findById(id);
         if (Objects.isNull(userEntity)) {
-            return SingleResponse.buildFailure(
-                    ErrorCode.B_USER_usernameError.getErrCode(), ErrorCode.B_USER_usernameError.getErrDesc());
+            throw new BizException(ErrorCode.B_USER_UNDEFINED);
         }
 
-        return SingleResponse.of(UserConvertor.toValueObject(userEntity));
+        return SingleResponse.of(UserAssembler.toValueObject(userEntity));
     }
 
 }

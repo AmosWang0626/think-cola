@@ -2,18 +2,17 @@ package com.amos.think.user;
 
 import com.alibaba.cola.catchlog.CatchAndLog;
 import com.alibaba.cola.dto.MultiResponse;
-import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.amos.think.api.IUserService;
 import com.amos.think.dto.UserModifyCmd;
 import com.amos.think.dto.UserRegisterCmd;
 import com.amos.think.dto.data.UserVO;
-import com.amos.think.dto.query.UserListByNameQuery;
+import com.amos.think.dto.query.UserListByParamQuery;
 import com.amos.think.dto.query.UserLoginQuery;
 import com.amos.think.user.executor.UserModifyCmdExe;
 import com.amos.think.user.executor.UserRegisterCmdExe;
 import com.amos.think.user.executor.query.UserInfoQueryExe;
-import com.amos.think.user.executor.query.UserListByNameQueryExe;
+import com.amos.think.user.executor.query.UserListByParamQueryExe;
 import com.amos.think.user.executor.query.UserLoginQueryExe;
 import org.springframework.stereotype.Service;
 
@@ -41,36 +40,31 @@ public class UserServiceImpl implements IUserService {
     @Resource
     private UserInfoQueryExe userInfoQueryExe;
     @Resource
-    private UserListByNameQueryExe userListByNameQueryExe;
+    private UserListByParamQueryExe userListByParamQueryExe;
 
     @Override
-    public Response register(UserRegisterCmd cmd) {
-
+    public UserVO register(UserRegisterCmd cmd) {
         return userRegisterCmdExe.execute(cmd);
     }
 
     @Override
-    public Response modify(UserModifyCmd cmd) {
-
+    public UserVO modify(UserModifyCmd cmd) {
         return userModifyCmdExe.execute(cmd);
     }
 
     @Override
-    public Response login(UserLoginQuery query) {
-
-        return userLoginQueryExe.execute(query);
+    public void login(UserLoginQuery query) {
+        userLoginQueryExe.execute(query);
     }
 
     @Override
-    public SingleResponse<UserVO> getUserInfo(String username) {
-
-        return userInfoQueryExe.execute(username);
+    public SingleResponse<UserVO> getUserInfo(Long id) {
+        return userInfoQueryExe.execute(id);
     }
 
     @Override
-    public MultiResponse<UserVO> listByName(UserListByNameQuery query) {
-
-        return userListByNameQueryExe.execute(query);
+    public MultiResponse<UserVO> listByName(UserListByParamQuery query) {
+        return userListByParamQueryExe.execute(query);
     }
 
 }

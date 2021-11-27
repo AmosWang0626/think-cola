@@ -16,6 +16,8 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class UserLoginQuery extends Query {
 
+    private static final long serialVersionUID = 5180182193190154824L;
+
     @NotBlank
     private String username;
 

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 根据用户名称查询用户
+ * 查询用户列表
  *
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
  * @date 2021/1/8
@@ -14,8 +14,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class UserListByNameQuery extends Query {
+public class UserListByParamQuery extends Query {
+
+    private static final long serialVersionUID = -2794036665910524477L;
 
     private String name;
+
+    private String username;
 
 }

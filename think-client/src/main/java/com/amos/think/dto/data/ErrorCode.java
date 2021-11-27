@@ -6,10 +6,12 @@ package com.amos.think.dto.data;
  * @author amos
  */
 public enum ErrorCode {
-    /***/
-    B_USER_usernameRepeat("B_USER_usernameRepeat", "用户名重复"),
-    B_USER_usernameError("B_USER_usernameError", "用户名不存在"),
-    B_USER_passwordError("B_USER_passwordError", "用户名或密码不正确");
+    /**
+     * 尽量让code可以达意
+     */
+    B_USER_USERNAME_REPEAT("B_USER_usernameRepeat", "用户名重复"),
+    B_USER_UNDEFINED("B_USER_undefined", "用户不存在"),
+    B_USER_PASSWORD_ERROR("B_USER_passwordError", "用户名或密码不正确");
 
     private final String errCode;
     private final String errDesc;

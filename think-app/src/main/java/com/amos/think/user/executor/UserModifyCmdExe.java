@@ -1,12 +1,12 @@
 package com.amos.think.user.executor;
 
-import com.alibaba.cola.dto.Response;
-import com.amos.think.convertor.UserConvertor;
+import com.amos.think.common.exception.BizException;
 import com.amos.think.domain.user.gateway.UserGateway;
+import com.amos.think.domain.user.model.UserEntity;
 import com.amos.think.dto.UserModifyCmd;
-import com.amos.think.dto.clientobject.UserModifyCO;
 import com.amos.think.dto.data.ErrorCode;
-import com.amos.think.user.validator.UserValidator;
+import com.amos.think.dto.data.UserVO;
+import com.amos.think.user.assembler.UserAssembler;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -23,20 +23,14 @@ public class UserModifyCmdExe {
     @Resource
     private UserGateway userGateway;
 
-    public Response execute(UserModifyCmd cmd) {
-        UserModifyCO userModify = cmd.getUserModify();
-
-        UserValidator.checkUserModify(userModify);
-
+    public UserVO execute(UserModifyCmd cmd) {
         // check 用户名是否重复
-        if (userGateway.checkByUsername(userModify.getId(), userModify.getUsername())) {
-            return Response.buildFailure(ErrorCode.B_USER_usernameRepeat.getErrCode(),
-                    ErrorCode.B_USER_usernameRepeat.getErrDesc());
+        if (userGateway.checkByUsername(cmd.getId(), cmd.getUsername())) {
+            throw new BizException(ErrorCode.B_USER_USERNAME_REPEAT);
         }
 
-        userGateway.save(UserConvertor.toEntity(userModify));
-
-        return Response.buildSuccess();
+        UserEntity userEntity = userGateway.save(UserAssembler.toEntity(cmd));
+        return UserAssembler.toValueObject(userEntity);
     }
 
 }

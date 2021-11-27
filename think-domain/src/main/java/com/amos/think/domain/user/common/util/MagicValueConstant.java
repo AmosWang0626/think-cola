@@ -1,4 +1,4 @@
-package com.amos.think.common.util;
+package com.amos.think.domain.user.common.util;
 
 /**
  * NumberConstant

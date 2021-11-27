@@ -52,8 +52,13 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 |IxxxService| API Service | xxxServiceI 不太习惯，就把 I 放在前边吧 |
 |xxxDomainService| Domain Service | 需要多个领域对象协作时，使用DomainService |
 |xxxValidator| Validator | 校验器，用于校验的类 |
-|xxxAssembler| Assembler | 组装器，组装外部服务调用参数 |
-|xxxConvertor| Convertor | 转化器，实现不同层级对象互转（[小彩蛋](./doc/README.md#Convertor)） |
+|xxxAssembler| Assembler | 组装器，DTO <---> Entity，用于Application层 |
+|xxxConvertor| Convertor | 转化器，Entity <---> DO，用于Infrastructure层 [小彩蛋](./doc/README.md#Convertor)） |
+
+- Application：对外暴露的是DTO，不能暴露 Entity
+- Domain：gateway对外暴露的是Entity，不能暴露 DO
+- 所以这里有两套转换器 xxxAssembler 和 xxxConvertor
+  ![assembler&convertor.png](doc/image/assembler&convertor.png)
 
 ### 方法名约定
 

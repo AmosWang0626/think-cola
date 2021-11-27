@@ -1,7 +1,6 @@
 package com.amos.think.gateway.impl.database.mapper;
 
-import com.amos.think.domain.user.model.UserEntity;
-import com.amos.think.dto.query.UserListByNameQuery;
+import com.amos.think.dto.query.UserListByParamQuery;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,13 +21,11 @@ public interface UserMapper {
 
     int update(UserDO userDO);
 
-    Optional<UserDO> findById(Long id);
+    Optional<UserDO> selectById(Long id);
 
-    UserDO findPasswordInfo(String username);
+    List<UserDO> selectByParam(UserListByParamQuery query);
 
-    UserDO findByUsername(String username);
-
-    List<UserEntity> findByName(UserListByNameQuery query);
+    UserDO selectPasswordInfo(String username);
 
     Boolean existByUsername(@Param("userId") Long userId, @Param("username") String username);
 

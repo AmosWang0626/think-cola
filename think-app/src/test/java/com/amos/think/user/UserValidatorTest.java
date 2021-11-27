@@ -1,18 +1,12 @@
 package com.amos.think.user;
 
-import com.amos.think.dto.clientobject.UserRegisterCO;
-import com.amos.think.user.validator.UserValidator;
+import com.amos.think.dto.UserRegisterCmd;
 import org.junit.Test;
 
 public class UserValidatorTest {
 
     @Test
     public void testValidation() {
-        UserRegisterCO userRegisterCO = new UserRegisterCO();
-        userRegisterCO.setId(12345L);
-        userRegisterCO.setUsername("amos");
-        userRegisterCO.setPassword("");
-
-        UserValidator.checkUserRegister(userRegisterCO);
+        new UserRegisterCmd("amos", "");
     }
 }

@@ -1,12 +1,10 @@
 package com.amos.think.dto;
 
 import com.alibaba.cola.dto.Command;
-import com.amos.think.dto.clientobject.UserRegisterCO;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 /**
  * 新增用户请求
@@ -16,16 +14,48 @@ import javax.validation.constraints.NotNull;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
 public class UserRegisterCmd extends Command {
 
+    private static final long serialVersionUID = -5726685703640910355L;
+
+    public UserRegisterCmd(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     /**
-     * 为什么加这个 xxxCO ?
-     * 首先，可以不加。这里比较特殊，Java对象单继承，xxxCO 继承自 UserVO。
-     *
-     * @see com.amos.think.dto.query.UserLoginQuery 就不需要单独定义一个 xxxCO
+     * 用户名
      */
-    @NotNull
-    private UserRegisterCO userRegister;
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 姓名（较常用，故放在用户主表）
+     */
+    private String name;
+
+    /**
+     * 手机号
+     */
+    private String phoneNo;
+
+    /**
+     * 性别
+     */
+    private Integer gender;
+
+    /**
+     * 生日
+     */
+    private LocalDate birthday;
+
+    /**
+     * 描述
+     */
+    private String description;
 
 }

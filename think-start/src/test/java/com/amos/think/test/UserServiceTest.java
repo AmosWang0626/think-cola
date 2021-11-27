@@ -1,17 +1,14 @@
 package com.amos.think.test;
 
 import com.alibaba.cola.dto.MultiResponse;
-import com.alibaba.cola.dto.Response;
-import com.alibaba.cola.dto.SingleResponse;
 import com.alibaba.fastjson.JSON;
 import com.amos.think.api.IUserService;
+import com.amos.think.common.exception.BizException;
 import com.amos.think.dto.UserModifyCmd;
 import com.amos.think.dto.UserRegisterCmd;
-import com.amos.think.dto.clientobject.UserModifyCO;
-import com.amos.think.dto.clientobject.UserRegisterCO;
 import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.data.UserVO;
-import com.amos.think.dto.query.UserListByNameQuery;
+import com.amos.think.dto.query.UserListByParamQuery;
 import com.amos.think.dto.query.UserLoginQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -25,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -44,6 +42,7 @@ public class UserServiceTest {
 
     private static final String username = "AMOS_" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     private static final String password = "666666";
+    private static Long id = null;
 
     @Before
     public void setUp() {
@@ -53,38 +52,33 @@ public class UserServiceTest {
     @Test
     public void user_1_Register() {
         //1.prepare
-        UserRegisterCO registerCO = new UserRegisterCO();
-        registerCO.setName("amos.wang");
-        registerCO.setUsername(username);
-        registerCO.setPassword(password);
-        registerCO.setPhoneNo("18907378888");
-        registerCO.setGender(1);
-        registerCO.setBirthday(LocalDate.of(2000, 1, 1));
-        registerCO.setDescription("https://amos.wang/");
-
-        UserRegisterCmd registerCmd = UserRegisterCmd.builder().userRegister(registerCO).build();
+        UserRegisterCmd registerCmd = new UserRegisterCmd(username, password);
+        registerCmd.setName("amos.wang");
+        registerCmd.setPhoneNo("18907378888");
+        registerCmd.setGender(1);
+        registerCmd.setBirthday(LocalDate.of(2000, 1, 1));
+        registerCmd.setDescription("https://amos.wang/");
 
         //2.execute
-        Response response = userService.register(registerCmd);
+        UserVO register = userService.register(registerCmd);
 
         //3.assert
-        Assert.assertTrue(response.isSuccess());
+        Assert.assertTrue(Objects.nonNull(register.getId()));
+
+        id = register.getId();
     }
 
     @Test
     public void user_2_RegisterByRepeatUsername() {
         //1.prepare
-        UserRegisterCO registerCO = new UserRegisterCO();
-        registerCO.setUsername(username);
-        registerCO.setPassword(password);
-
-        UserRegisterCmd registerCmd = UserRegisterCmd.builder().userRegister(registerCO).build();
+        UserRegisterCmd registerCmd = new UserRegisterCmd(username, password);
 
         //2.execute
-        Response response = userService.register(registerCmd);
-
-        //3.assert error
-        Assert.assertEquals(ErrorCode.B_USER_usernameRepeat.getErrCode(), response.getErrCode());
+        try {
+            userService.register(registerCmd);
+        } catch (BizException e) {
+            Assert.assertEquals(ErrorCode.B_USER_USERNAME_REPEAT, e.getErrorCode());
+        }
     }
 
     @Test
@@ -95,44 +89,30 @@ public class UserServiceTest {
         userLoginQuery.setPassword(password);
 
         //2.execute
-        Response response = userService.login(userLoginQuery);
-
-        //3.assert success
-        Assert.assertTrue(response.isSuccess());
+        userService.login(userLoginQuery);
     }
 
     @Test
     public void user_4_Modify() {
         //1.prepare
-        SingleResponse<UserVO> userInfoResponse = userService.getUserInfo(username);
-        Assert.assertTrue(userInfoResponse.isSuccess() && userInfoResponse.getData() != null);
-
-        Long userId = userInfoResponse.getData().getId();
-
-        UserModifyCmd userModify = new UserModifyCmd();
-
-        UserModifyCO userModifyCO = new UserModifyCO();
-        userModifyCO.setId(userId);
-        userModifyCO.setName("小道远");
-        userModifyCO.setUsername(username);
-        userModifyCO.setPhoneNo("189****8888");
-        userModifyCO.setGender(0);
-        userModifyCO.setBirthday(LocalDate.of(2000, 6, 26));
-        userModifyCO.setDescription("https://github.com/AmosWang0626");
-
-        userModify.setUserModify(userModifyCO);
+        UserModifyCmd userModify = new UserModifyCmd(id, username);
+        userModify.setName("小道远");
+        userModify.setPhoneNo("189****8888");
+        userModify.setGender(0);
+        userModify.setBirthday(LocalDate.of(2000, 6, 26));
+        userModify.setDescription("https://github.com/AmosWang0626");
 
         //2.execute
-        Response response = userService.modify(userModify);
+        UserVO userVO = userService.modify(userModify);
 
-        //3.assert
-        Assert.assertTrue(response.isSuccess());
+        //3.assert error
+        Assert.assertTrue(Objects.nonNull(userVO));
     }
 
     @Test
     public void user_5_listByName() {
         //1.prepare
-        UserListByNameQuery query = UserListByNameQuery.builder().build();
+        UserListByParamQuery query = UserListByParamQuery.builder().build();
 
         //2.execute
         MultiResponse<UserVO> response = userService.listByName(query);

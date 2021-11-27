@@ -1,7 +1,7 @@
 package com.amos.think.domain.user.gateway;
 
 import com.amos.think.domain.user.model.UserEntity;
-import com.amos.think.dto.query.UserListByNameQuery;
+import com.amos.think.dto.query.UserListByParamQuery;
 
 import java.util.List;
 
@@ -17,24 +17,17 @@ public interface UserGateway {
      * 保存用户
      *
      * @param userEntity User Domain
+     * @return 用户实体
      */
-    void save(UserEntity userEntity);
-
-    /**
-     * 获取密码信息
-     *
-     * @param username 用户名
-     * @return 密码、密码盐
-     */
-    UserEntity findPasswordInfo(String username);
+    UserEntity save(UserEntity userEntity);
 
     /**
      * 获取用户信息
      *
-     * @param username 用户名
+     * @param id 用户ID
      * @return 用户实体
      */
-    UserEntity findByUsername(String username);
+    UserEntity findById(Long id);
 
     /**
      * 根据条件查询
@@ -42,7 +35,15 @@ public interface UserGateway {
      * @param query 用户名等
      * @return List 用户实体
      */
-    List<UserEntity> findByName(UserListByNameQuery query);
+    List<UserEntity> findByParam(UserListByParamQuery query);
+
+    /**
+     * 获取密码信息
+     *
+     * @param username 用户名
+     * @return 用户实体(密码、密码盐)
+     */
+    UserEntity findPasswordInfo(String username);
 
     /**
      * 判断用户名是否已存在

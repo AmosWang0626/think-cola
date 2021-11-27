@@ -1,5 +1,7 @@
 package com.amos.think.domain.user.model;
 
+import com.amos.think.domain.user.model.types.UserName;
+import com.amos.think.domain.user.model.types.UserPassword;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -16,28 +18,36 @@ public class UserEntity {
     private Long id;
 
     /**
+     * 用户名
+     */
+    private UserName username;
+    /**
+     * 密码
+     */
+    private UserPassword password;
+
+    /**
      * 姓名
      */
     private String name;
 
     /**
-     * 用户名
+     * 手机号
      */
-    private String username;
-    /**
-     * 密码
-     */
-    private String password;
-    /**
-     * 密码盐
-     */
-    private String salt;
-
     private String phoneNo;
 
+    /**
+     * 性别
+     */
     private Integer gender;
 
+    /**
+     * 生日
+     */
     private LocalDate birthday;
 
+    /**
+     * 描述
+     */
     private String description;
 }
