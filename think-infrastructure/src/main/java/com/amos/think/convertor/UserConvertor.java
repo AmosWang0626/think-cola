@@ -1,8 +1,7 @@
 package com.amos.think.convertor;
 
 import com.amos.think.domain.user.model.UserEntity;
-import com.amos.think.domain.user.model.types.UserName;
-import com.amos.think.domain.user.model.types.UserPassword;
+import com.amos.think.domain.user.model.UserName;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;
 import com.amos.think.gateway.impl.database.dataobject.UserInfoDO;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -16,13 +15,6 @@ import java.time.LocalDateTime;
  * @date 2021/1/9
  */
 public class UserConvertor {
-
-    public static UserEntity toPasswordInfoEntity(UserDO userDO) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setPassword(new UserPassword(userDO.getPassword(), userDO.getSalt()));
-
-        return userEntity;
-    }
 
     public static UserEntity toEntity(UserDO userDO, UserInfoDO userInfoDO) {
         UserEntity userEntity = new UserEntity();
@@ -45,7 +37,6 @@ public class UserConvertor {
         userDO.setId(userEntity.getId());
         userDO.setUsername(userEntity.getUsername().getName());
         userDO.setPassword(userEntity.getPassword().getEncryptPassword());
-        userDO.setSalt(userEntity.getPassword().getSalt());
         userDO.setName(userEntity.getName());
         userDO.setDeleteFlag(false);
         userDO.setGmtCreate(LocalDateTime.now());

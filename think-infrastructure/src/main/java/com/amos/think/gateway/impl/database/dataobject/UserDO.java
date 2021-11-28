@@ -22,10 +22,6 @@ public class UserDO extends BaseDO {
      * 密码
      */
     private String password;
-    /**
-     * 密码盐
-     */
-    private String salt;
 
     /**
      * 姓名（较常用，故放在用户主表）

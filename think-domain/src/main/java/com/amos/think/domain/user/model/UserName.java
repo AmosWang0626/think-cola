@@ -1,4 +1,4 @@
-package com.amos.think.domain.user.model.types;
+package com.amos.think.domain.user.model;
 
 import org.apache.commons.lang3.StringUtils;
 

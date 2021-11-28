@@ -1,7 +1,5 @@
 package com.amos.think.domain.user.model;
 
-import com.amos.think.domain.user.model.types.UserName;
-import com.amos.think.domain.user.model.types.UserPassword;
 import lombok.Data;
 
 import java.time.LocalDate;

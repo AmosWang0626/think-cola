@@ -41,7 +41,7 @@ public interface UserGateway {
      * 获取密码信息
      *
      * @param username 用户名
-     * @return 用户实体(密码、密码盐)
+     * @return 密码
      */
     UserEntity findPasswordInfo(String username);
 

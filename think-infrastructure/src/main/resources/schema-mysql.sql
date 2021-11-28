@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS `org_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `salt` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `info_id` varchar(255) DEFAULT NULL,
   `delete_flag` bit(1) NOT NULL,

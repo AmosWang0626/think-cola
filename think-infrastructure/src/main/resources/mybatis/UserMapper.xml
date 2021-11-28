@@ -18,10 +18,10 @@
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO org_user
-        ( username, name, password, salt, info_id,
+        ( username, name, password, info_id,
         creator, gmt_create, modifier, gmt_modify, delete_flag )
         VALUES
-        ( #{username}, #{name}, #{password}, #{salt}, #{infoId},
+        ( #{username}, #{name}, #{password}, #{infoId},
         #{creator}, #{gmtCreate}, #{modifier}, #{gmtModify}, #{deleteFlag} )
     </insert>
 
@@ -80,8 +80,8 @@
         </where>
     </select>
 
-    <select id="selectPasswordInfo" resultType="com.amos.think.gateway.impl.database.dataobject.UserDO">
-        select password, salt
+    <select id="selectPassword" resultType="java.lang.String">
+        select password
         from org_user
         where username = #{username}
         and delete_flag = 0
