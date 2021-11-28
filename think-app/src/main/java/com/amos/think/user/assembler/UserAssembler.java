@@ -1,8 +1,8 @@
 package com.amos.think.user.assembler;
 
-import com.amos.think.domain.user.model.UserEntity;
-import com.amos.think.domain.user.model.UserName;
-import com.amos.think.domain.user.model.UserPassword;
+import com.amos.think.domain.user.UserEntity;
+import com.amos.think.domain.user.UserName;
+import com.amos.think.domain.user.UserPassword;
 import com.amos.think.dto.UserModifyCmd;
 import com.amos.think.dto.UserRegisterCmd;
 import com.amos.think.dto.data.UserVO;

@@ -1,8 +1,8 @@
-package com.amos.think.user.executor.query;
+package com.amos.think.user.command.query;
 
 import com.amos.think.common.exception.BizException;
-import com.amos.think.domain.user.gateway.UserGateway;
-import com.amos.think.domain.user.model.UserEntity;
+import com.amos.think.domain.gateway.UserGateway;
+import com.amos.think.domain.user.UserEntity;
 import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.query.UserLoginQuery;
 import org.springframework.stereotype.Component;

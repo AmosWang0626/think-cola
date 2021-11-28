@@ -1,4 +1,4 @@
-package com.amos.think.domain.user.model;
+package com.amos.think.domain.user;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;

@@ -1,4 +1,4 @@
-package com.amos.think.user;
+package com.amos.think.service;
 
 import com.alibaba.cola.catchlog.CatchAndLog;
 import com.alibaba.cola.dto.MultiResponse;
@@ -9,11 +9,11 @@ import com.amos.think.dto.UserRegisterCmd;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.dto.query.UserListByParamQuery;
 import com.amos.think.dto.query.UserLoginQuery;
-import com.amos.think.user.executor.UserModifyCmdExe;
-import com.amos.think.user.executor.UserRegisterCmdExe;
-import com.amos.think.user.executor.query.UserInfoQueryExe;
-import com.amos.think.user.executor.query.UserListByParamQueryExe;
-import com.amos.think.user.executor.query.UserLoginQueryExe;
+import com.amos.think.user.command.UserModifyCmdExe;
+import com.amos.think.user.command.UserRegisterCmdExe;
+import com.amos.think.user.command.query.UserInfoQueryExe;
+import com.amos.think.user.command.query.UserListByParamQueryExe;
+import com.amos.think.user.command.query.UserLoginQueryExe;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

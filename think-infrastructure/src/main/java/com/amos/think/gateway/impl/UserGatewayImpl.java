@@ -2,9 +2,9 @@ package com.amos.think.gateway.impl;
 
 import com.amos.think.common.exception.BizException;
 import com.amos.think.convertor.UserConvertor;
-import com.amos.think.domain.user.gateway.UserGateway;
-import com.amos.think.domain.user.model.UserEntity;
-import com.amos.think.domain.user.model.UserPassword;
+import com.amos.think.domain.gateway.UserGateway;
+import com.amos.think.domain.user.UserEntity;
+import com.amos.think.domain.user.UserPassword;
 import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.query.UserListByParamQuery;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;

@@ -1,7 +1,7 @@
 package com.amos.think.convertor;
 
-import com.amos.think.domain.user.model.UserEntity;
-import com.amos.think.domain.user.model.UserName;
+import com.amos.think.domain.user.UserEntity;
+import com.amos.think.domain.user.UserName;
 import com.amos.think.gateway.impl.database.dataobject.UserDO;
 import com.amos.think.gateway.impl.database.dataobject.UserInfoDO;
 import org.apache.commons.lang3.tuple.ImmutablePair;

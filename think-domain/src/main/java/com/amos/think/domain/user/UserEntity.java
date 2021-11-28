@@ -1,4 +1,4 @@
-package com.amos.think.domain.user.model;
+package com.amos.think.domain.user;
 
 import lombok.Data;
 
