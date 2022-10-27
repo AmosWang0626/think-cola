@@ -1,7 +1,7 @@
 package com.amos.think.user.command.query;
 
 import com.alibaba.cola.dto.SingleResponse;
-import com.amos.think.common.exception.BizException;
+import com.amos.think.common.exception.ThinkBizException;
 import com.amos.think.domain.gateway.UserGateway;
 import com.amos.think.domain.user.UserEntity;
 import com.amos.think.dto.data.ErrorCode;
@@ -27,7 +27,7 @@ public class UserInfoQueryExe {
     public SingleResponse<UserVO> execute(Long id) {
         UserEntity userEntity = userGateway.findById(id);
         if (Objects.isNull(userEntity)) {
-            throw new BizException(ErrorCode.B_USER_UNDEFINED);
+            throw new ThinkBizException(ErrorCode.B_USER_UNDEFINED);
         }
 
         return SingleResponse.of(UserAssembler.toValueObject(userEntity));

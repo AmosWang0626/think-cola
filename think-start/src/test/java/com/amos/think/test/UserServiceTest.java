@@ -3,7 +3,7 @@ package com.amos.think.test;
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.fastjson.JSON;
 import com.amos.think.api.IUserService;
-import com.amos.think.common.exception.BizException;
+import com.amos.think.common.exception.ThinkBizException;
 import com.amos.think.dto.UserModifyCmd;
 import com.amos.think.dto.UserRegisterCmd;
 import com.amos.think.dto.data.ErrorCode;
@@ -76,8 +76,8 @@ public class UserServiceTest {
         //2.execute
         try {
             userService.register(registerCmd);
-        } catch (BizException e) {
-            Assert.assertEquals(ErrorCode.B_USER_USERNAME_REPEAT, e.getErrorCode());
+        } catch (ThinkBizException e) {
+            Assert.assertEquals(ErrorCode.B_USER_USERNAME_REPEAT.getErrCode(), e.getErrCode());
         }
     }
 

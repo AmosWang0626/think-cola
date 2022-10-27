@@ -10,8 +10,6 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 ## 项目架构图
 
-> adapter 暂时用不到，就用 controller 代替了。
-
 ![项目架构图](doc/image/framework.png)
 
 ## 项目案例

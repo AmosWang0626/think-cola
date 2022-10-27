@@ -8,9 +8,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>think-controller</artifactId>
+    <artifactId>think-adapter</artifactId>
     <packaging>jar</packaging>
-    <name>think-controller</name>
+    <name>think-adapter</name>
 
     <dependencies>
         <dependency>

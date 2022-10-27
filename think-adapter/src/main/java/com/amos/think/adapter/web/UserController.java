@@ -1,4 +1,4 @@
-package com.amos.think.web;
+package com.amos.think.adapter.web;
 
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;

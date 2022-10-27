@@ -1,6 +1,6 @@
 package com.amos.think.gateway.impl;
 
-import com.amos.think.common.exception.BizException;
+import com.amos.think.common.exception.ThinkBizException;
 import com.amos.think.convertor.UserConvertor;
 import com.amos.think.domain.gateway.UserGateway;
 import com.amos.think.domain.user.UserEntity;
@@ -53,7 +53,7 @@ public class UserGatewayImpl implements UserGateway {
     public UserEntity findById(Long id) {
         Optional<UserDO> findById = userMapper.selectById(id);
         if (!findById.isPresent()) {
-            throw new BizException(ErrorCode.B_USER_UNDEFINED);
+            throw new ThinkBizException(ErrorCode.B_USER_UNDEFINED);
         }
 
         UserDO userDO = findById.get();
@@ -120,7 +120,7 @@ public class UserGatewayImpl implements UserGateway {
     private UserEntity modifyUser(UserEntity userEntity) {
         Optional<UserDO> findById = userMapper.selectById(userEntity.getId());
         if (!findById.isPresent()) {
-            throw new BizException(ErrorCode.B_USER_UNDEFINED);
+            throw new ThinkBizException(ErrorCode.B_USER_UNDEFINED);
         }
 
         UserDO userDO = findById.get();
