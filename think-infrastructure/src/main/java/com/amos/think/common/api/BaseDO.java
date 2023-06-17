@@ -25,7 +25,7 @@ public abstract class BaseDO {
 
     private String modifier;
 
-    private LocalDateTime gmtModify;
+    private LocalDateTime gmtModified;
 
     private Boolean deleteFlag;
 

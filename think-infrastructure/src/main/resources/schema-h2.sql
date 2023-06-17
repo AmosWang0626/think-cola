@@ -6,12 +6,12 @@ CREATE TABLE IF NOT EXISTS `org_user` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `info_id` varchar(255) DEFAULT NULL,
+  `info_id` bigint(20) DEFAULT NULL,
   `delete_flag` bit(1) NOT NULL,
   `creator` varchar(255) DEFAULT NULL,
   `gmt_create` datetime DEFAULT NULL,
   `modifier` varchar(255) DEFAULT NULL,
-  `gmt_modify` datetime DEFAULT NULL,
+  `gmt_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 

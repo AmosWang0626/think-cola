@@ -12,7 +12,7 @@
         <result property="creator" column="creator"/>
         <result property="gmtCreate" column="gmt_create"/>
         <result property="modifier" column="modifier"/>
-        <result property="gmtModify" column="gmt_modify"/>
+        <result property="gmtModified" column="gmt_modify"/>
         <result property="deleteFlag" column="delete_flag"/>
     </resultMap>
 
@@ -22,7 +22,7 @@
         creator, gmt_create, modifier, gmt_modify, delete_flag )
         VALUES
         ( #{username}, #{name}, #{password}, #{infoId},
-        #{creator}, #{gmtCreate}, #{modifier}, #{gmtModify}, #{deleteFlag} )
+        #{creator}, #{gmtCreate}, #{modifier}, #{gmtModified}, #{deleteFlag} )
     </insert>
 
     <insert id="update" useGeneratedKeys="true" keyProperty="id">
@@ -37,8 +37,8 @@
             <if test="modifier != null">
                 modifier = #{modifier},
             </if>
-            <if test="gmtModify != null">
-                gmt_modify = #{gmtModify},
+            <if test="gmtModified != null">
+                gmt_modify = #{gmtModified},
             </if>
             <if test="deleteFlag != null">
                 delete_flag = #{deleteFlag},

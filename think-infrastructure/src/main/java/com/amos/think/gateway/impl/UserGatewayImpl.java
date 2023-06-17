@@ -136,7 +136,7 @@ public class UserGatewayImpl implements UserGateway {
         }
 
         // 2. 再保存userDO
-        userDO.setGmtModify(LocalDateTime.now());
+        userDO.setGmtModified(LocalDateTime.now());
         update = userMapper.update(userDO);
         if (update < 1) {
             throw new PersistenceException("更新用户异常");
