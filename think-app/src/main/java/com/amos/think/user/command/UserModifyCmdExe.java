@@ -7,9 +7,8 @@ import com.amos.think.dto.UserModifyCmd;
 import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.user.assembler.UserAssembler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * UserAddCmdExe
@@ -20,7 +19,7 @@ import javax.annotation.Resource;
 @Component
 public class UserModifyCmdExe {
 
-    @Resource
+    @Autowired
     private UserGateway userGateway;
 
     public UserVO execute(UserModifyCmd cmd) {

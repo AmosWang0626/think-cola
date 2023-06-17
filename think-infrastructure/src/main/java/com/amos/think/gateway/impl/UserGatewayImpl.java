@@ -13,10 +13,10 @@ import com.amos.think.gateway.impl.database.mapper.UserInfoMapper;
 import com.amos.think.gateway.impl.database.mapper.UserMapper;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.ibatis.exceptions.PersistenceException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +32,9 @@ import java.util.Optional;
 @Component("userGateway")
 public class UserGatewayImpl implements UserGateway {
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
-    @Resource
+    @Autowired
     private UserInfoMapper userInfoMapper;
 
     @Override
@@ -52,7 +52,7 @@ public class UserGatewayImpl implements UserGateway {
     @Override
     public UserEntity findById(Long id) {
         Optional<UserDO> findById = userMapper.selectById(id);
-        if (!findById.isPresent()) {
+        if (findById.isEmpty()) {
             throw new ThinkBizException(ErrorCode.B_USER_UNDEFINED);
         }
 
@@ -119,7 +119,7 @@ public class UserGatewayImpl implements UserGateway {
      */
     private UserEntity modifyUser(UserEntity userEntity) {
         Optional<UserDO> findById = userMapper.selectById(userEntity.getId());
-        if (!findById.isPresent()) {
+        if (findById.isEmpty()) {
             throw new ThinkBizException(ErrorCode.B_USER_UNDEFINED);
         }
 
