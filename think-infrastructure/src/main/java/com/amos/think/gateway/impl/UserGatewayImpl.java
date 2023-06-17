@@ -52,7 +52,7 @@ public class UserGatewayImpl implements UserGateway {
     @Override
     public UserEntity findById(Long id) {
         Optional<UserDO> findById = userMapper.selectById(id);
-        if (!findById.isPresent()) {
+        if (findById.isEmpty()) {
             throw new ThinkBizException(ErrorCode.B_USER_UNDEFINED);
         }
 
@@ -119,7 +119,7 @@ public class UserGatewayImpl implements UserGateway {
      */
     private UserEntity modifyUser(UserEntity userEntity) {
         Optional<UserDO> findById = userMapper.selectById(userEntity.getId());
-        if (!findById.isPresent()) {
+        if (findById.isEmpty()) {
             throw new ThinkBizException(ErrorCode.B_USER_UNDEFINED);
         }
 
