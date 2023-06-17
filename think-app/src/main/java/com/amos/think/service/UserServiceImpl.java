@@ -14,9 +14,8 @@ import com.amos.think.user.command.UserRegisterCmdExe;
 import com.amos.think.user.command.query.UserInfoQueryExe;
 import com.amos.think.user.command.query.UserListByParamQueryExe;
 import com.amos.think.user.command.query.UserLoginQueryExe;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * 用户相关
@@ -31,15 +30,15 @@ public class UserServiceImpl implements IUserService {
     /**
      * xxxExe 避免 Service 膨胀利器
      */
-    @Resource
+    @Autowired
     private UserRegisterCmdExe userRegisterCmdExe;
-    @Resource
+    @Autowired
     private UserModifyCmdExe userModifyCmdExe;
-    @Resource
+    @Autowired
     private UserLoginQueryExe userLoginQueryExe;
-    @Resource
+    @Autowired
     private UserInfoQueryExe userInfoQueryExe;
-    @Resource
+    @Autowired
     private UserListByParamQueryExe userListByParamQueryExe;
 
     @Override

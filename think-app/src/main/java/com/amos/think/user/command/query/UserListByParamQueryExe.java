@@ -6,9 +6,9 @@ import com.amos.think.domain.user.UserEntity;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.dto.query.UserListByParamQuery;
 import com.amos.think.user.assembler.UserAssembler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Component
 public class UserListByParamQueryExe {
 
-    @Resource
+    @Autowired
     private UserGateway userGateway;
 
     public MultiResponse<UserVO> execute(UserListByParamQuery query) {

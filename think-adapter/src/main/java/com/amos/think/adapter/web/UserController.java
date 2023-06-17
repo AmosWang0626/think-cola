@@ -7,9 +7,8 @@ import com.amos.think.dto.UserRegisterCmd;
 import com.amos.think.dto.data.UserVO;
 import com.amos.think.dto.query.UserListByParamQuery;
 import com.amos.think.dto.query.UserLoginQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 
 /**
  * 用户相关
@@ -21,7 +20,7 @@ import javax.annotation.Resource;
 @RequestMapping("user")
 public class UserController {
 
-    @Resource
+    @Autowired
     private IUserService userService;
 
 

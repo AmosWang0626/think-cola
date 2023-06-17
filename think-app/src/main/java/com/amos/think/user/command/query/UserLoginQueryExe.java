@@ -5,9 +5,9 @@ import com.amos.think.domain.gateway.UserGateway;
 import com.amos.think.domain.user.UserEntity;
 import com.amos.think.dto.data.ErrorCode;
 import com.amos.think.dto.query.UserLoginQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
@@ -19,7 +19,7 @@ import java.util.Objects;
 @Component
 public class UserLoginQueryExe {
 
-    @Resource
+    @Autowired
     private UserGateway userGateway;
 
     public void execute(UserLoginQuery query) {
