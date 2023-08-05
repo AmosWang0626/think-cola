@@ -12,14 +12,14 @@
         <result property="creator" column="creator"/>
         <result property="gmtCreate" column="gmt_create"/>
         <result property="modifier" column="modifier"/>
-        <result property="gmtModified" column="gmt_modify"/>
+        <result property="gmtModified" column="gmt_modified"/>
         <result property="deleteFlag" column="delete_flag"/>
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO org_user
         ( username, name, password, info_id,
-        creator, gmt_create, modifier, gmt_modify, delete_flag )
+        creator, gmt_create, modifier, gmt_modified, delete_flag )
         VALUES
         ( #{username}, #{name}, #{password}, #{infoId},
         #{creator}, #{gmtCreate}, #{modifier}, #{gmtModified}, #{deleteFlag} )
@@ -38,7 +38,7 @@
                 modifier = #{modifier},
             </if>
             <if test="gmtModified != null">
-                gmt_modify = #{gmtModified},
+                gmt_modified = #{gmtModified},
             </if>
             <if test="deleteFlag != null">
                 delete_flag = #{deleteFlag},
