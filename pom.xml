@@ -18,7 +18,7 @@
 
         <mybatis-starter.version>3.0.2</mybatis-starter.version>
         <spring-boot.version>3.1.0</spring-boot.version>
-        <cola.components.version>4.0.0</cola.components.version>
+        <cola.components.version>5.0.0</cola.components.version>
     </properties>
 
     <modules>
