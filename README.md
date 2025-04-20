@@ -5,7 +5,14 @@
 ## 使用 Maven archetype 创建项目
 
 ```shell
-mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SNAPSHOT -Dpackage=com.amos.think -DarchetypeArtifactId=cola-framework-archetype-web -DarchetypeGroupId=com.alibaba.cola -DarchetypeVersion=4.0.0
+mvn archetype:generate \
+    -DgroupId=com.amos \
+    -DartifactId=think \
+    -Dversion=1.0.0-SNAPSHOT \
+    -Dpackage=com.amos.think \
+    -DarchetypeArtifactId=cola-framework-archetype-web \
+    -DarchetypeGroupId=com.alibaba.cola \
+    -DarchetypeVersion=4.0.0
 ```
 
 ## 项目架构图
@@ -36,22 +43,22 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 > 含有部分个人习惯
 
-|规范|用途|解释|
-|---|---|---|
-|xxxCO| Client Object | 客户对象，用于传输数据，等同于DTO |
-|xxxCmd| Client Request | Cmd代表Command，表示一个写请求 |
-|xxxQuery| Client Request | Query，表示一个读请求 |
-|xxxCmdExe| Command Executor | 命令模式，每一个写请求对应一个执行器 |
-|xxxQueryExe| Query Executor | 命令模式，每一个读请求对应一个执行器 |
-|xxxVO| Value Object | 值对象 |
-|xxxEntity| Entity | 领域实体 |
-|xxxDO| Data Object | 数据对象，用于持久化 |
-|xxxInterceptor| Command Interceptor | 拦截器，用于处理切面逻辑 |
-|IxxxService| API Service | xxxServiceI 不太习惯，就把 I 放在前边吧 |
-|xxxDomainService| Domain Service | 需要多个领域对象协作时，使用DomainService |
-|xxxValidator| Validator | 校验器，用于校验的类 |
-|xxxAssembler| Assembler | 组装器，DTO <---> Entity，用于Application层 |
-|xxxConvertor| Convertor | 转化器，Entity <---> DO，用于Infrastructure层 [小彩蛋](./doc/README.md#Convertor)） |
+| 规范               | 用途                  | 解释                                                                      |
+|------------------|---------------------|-------------------------------------------------------------------------|
+| xxxCO            | Client Object       | 客户对象，用于传输数据，等同于DTO                                                      |
+| xxxCmd           | Client Request      | Cmd代表Command，表示一个写请求                                                    |
+| xxxQuery         | Client Request      | Query，表示一个读请求                                                           |
+| xxxCmdExe        | Command Executor    | 命令模式，每一个写请求对应一个执行器                                                      |
+| xxxQueryExe      | Query Executor      | 命令模式，每一个读请求对应一个执行器                                                      |
+| xxxVO            | Value Object        | 值对象                                                                     |
+| xxxEntity        | Entity              | 领域实体                                                                    |
+| xxxDO            | Data Object         | 数据对象，用于持久化                                                              |
+| xxxInterceptor   | Command Interceptor | 拦截器，用于处理切面逻辑                                                            |
+| IxxxService      | API Service         | xxxServiceI 不太习惯，就把 I 放在前边吧                                             |
+| xxxDomainService | Domain Service      | 需要多个领域对象协作时，使用DomainService                                             |
+| xxxValidator     | Validator           | 校验器，用于校验的类                                                              |
+| xxxAssembler     | Assembler           | 组装器，DTO <---> Entity，用于Application层                                     |
+| xxxConvertor     | Convertor           | 转化器，Entity <---> DO，用于Infrastructure层 [小彩蛋](./doc/README.md#Convertor)） |
 
 - Application：对外暴露的是DTO，不能暴露 Entity
 - Domain：gateway对外暴露的是Entity，不能暴露 DO
@@ -60,16 +67,16 @@ mvn archetype:generate  -DgroupId=com.amos -DartifactId=think -Dversion=1.0.0-SN
 
 ### 方法名约定
 
-|CRUD操作| 方法名约定 |
-|---|---|
-|新增| create |
-|添加| add |
-|删除| remove（App和Domain层），delete（Infrastructure层） |
-|修改| update |
-|查询（单个结果） | get |
-|查询（多个结果） | list |
-|分页查询| page |
-|统计| count |
+| CRUD操作   | 方法名约定                                       |
+|----------|---------------------------------------------|
+| 新增       | create                                      |
+| 添加       | add                                         |
+| 删除       | remove（App和Domain层），delete（Infrastructure层） |
+| 修改       | update                                      |
+| 查询（单个结果） | get                                         |
+| 查询（多个结果） | list                                        |
+| 分页查询     | page                                        |
+| 统计       | count                                       |
 
 ### 模块规范
 
